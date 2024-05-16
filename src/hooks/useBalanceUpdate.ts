@@ -18,10 +18,6 @@ export const useBalanceUpdate = () => {
 
     setLoading(true);
     setError(null);
-    dispatch({
-      type: actions.UPDATE_BALANCE,
-      balance: '...',
-    });
 
     try {
       const response = await fetch(`${API_URL}/accounts/${address}`);
