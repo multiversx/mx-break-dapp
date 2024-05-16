@@ -4,8 +4,9 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
 import { useFaucet } from './hooks/useFaucet.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faFan, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
+import { useSpamming } from '../../hooks/useSpamming.ts';
 
 const sitekey = '6LeOnY0fAAAAABCn_KfmqldzSsOEOP1JHvdfyYGd';
 
@@ -17,6 +18,7 @@ export const Send = () => {
 
   const generateWallet = useGenerateWallet();
   const { claimTokens, claiming } = useFaucet();
+  const { start, stop } = useSpamming();
 
   const formattedBalance = formatAmount({
     input: !balance?.includes('...') ? balance ?? '0' : '0',
@@ -70,6 +72,27 @@ export const Send = () => {
                 </button>
               </>
             )}
+          </div>
+        </div>
+      </div>
+      <div className="flex items-start sm:items-center h-full sm:bg-center">
+        <div className="flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl">
+          <div className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
+            <h2 className="flex text-xl font-medium group">Start spamming</h2>
+            <div className="flex gap-2">
+              <button
+                onClick={start}
+                className="flex flex-1 bg-blue-500 text-white p-2 rounded-md align-middle justify-center"
+              >
+                <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
+                {/*<FontAwesomeIcon icon={faFan} className="fa-1x p-1" spin />*/}
+                <span>Start</span>
+              </button>
+              <button onClick={stop} className="flex flex-1 bg-blue-500 text-white p-2 rounded-md">
+                <FontAwesomeIcon icon={faStop} className="fa-1x p-1" />
+                <span>Stop</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

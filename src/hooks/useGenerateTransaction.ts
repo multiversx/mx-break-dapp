@@ -20,7 +20,10 @@ export const useGenerateTransaction = () => {
         version: 0,
       });
 
-      return transaction.toPlainObject();
+      return {
+        transaction,
+        serialized: transaction.serializeForSigning(),
+      };
     },
     [address]
   );

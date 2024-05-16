@@ -12,6 +12,7 @@ export type AppStateType = {
   address?: string;
   encrypted?: string | object;
   balance?: string;
+  nonce: number;
   sending?: boolean;
   accessToken?: string;
 };
@@ -20,6 +21,7 @@ const initialState: AppStateType = {
   address: '',
   encrypted: '',
   balance: '...',
+  nonce: 0,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,20 +38,23 @@ type ActionMap<M extends { [index: string]: any }> = {
 enum ActionType {
   GENERATE = 'GENERATE',
   SEND = 'SEND',
-  CLAIM = 'CLAIM',
   UPDATE_BALANCE = 'UPDATE_BALANCE',
+  UPDATE_NONCE = 'UPDATE_NONCE',
   STOP = 'STOP',
   CLEAR = 'CLEAR',
 }
 
 type ActionPayloadType = {
   [ActionType.GENERATE]: {
-    address?: string;
-    encrypted?: string | object;
-    accessToken?: string;
+    address: string;
+    encrypted: string | object;
+    accessToken: string;
   };
   [ActionType.UPDATE_BALANCE]: {
-    balance?: string;
+    balance: string;
+  };
+  [ActionType.UPDATE_NONCE]: {
+    nonce: number;
   };
   [ActionType.SEND]: never;
   [ActionType.STOP]: never;
@@ -87,6 +92,15 @@ export const reducer = (state: AppStateType, action: Actions): typeof initialSta
       return {
         ...state,
         balance,
+      };
+    }
+
+    case ActionType.UPDATE_NONCE: {
+      const { nonce } = action;
+
+      return {
+        ...state,
+        nonce,
       };
     }
 

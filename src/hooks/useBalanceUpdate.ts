@@ -27,6 +27,10 @@ export const useBalanceUpdate = () => {
         type: actions.UPDATE_BALANCE,
         balance: data.balance,
       });
+      dispatch({
+        type: actions.UPDATE_NONCE,
+        nonce: data.nonce,
+      });
     } catch (e) {
       setError(e);
       dispatch({
