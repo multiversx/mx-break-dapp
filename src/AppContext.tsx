@@ -1,4 +1,11 @@
-import { createContext, Dispatch, PropsWithChildren, useContext, useReducer } from 'react';
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import { SESSION_KEY } from './const/session.ts';
 
 export type AppStateType = {
@@ -7,11 +14,13 @@ export type AppStateType = {
   balance?: string;
   claimingTokens?: number;
   sending?: boolean;
+  accessToken?: string;
 };
 
 const initialState: AppStateType = {
   address: '',
   encrypted: '',
+  balance: '...',
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,6 +47,7 @@ type ActionPayloadType = {
   [ActionType.GENERATE]: {
     address?: string;
     encrypted?: string | object;
+    accessToken?: string;
   };
   [ActionType.CLAIM]: {
     claimingTokens?: number;
@@ -65,12 +75,13 @@ const AppContext = createContext<ContextType>({
 export const reducer = (state: AppStateType, action: Actions): typeof initialState => {
   switch (action.type) {
     case ActionType.GENERATE: {
-      const { address, encrypted } = action;
+      const { address, encrypted, accessToken } = action;
 
       return {
         ...state,
         address,
         encrypted,
+        accessToken,
       };
     }
 
@@ -107,7 +118,7 @@ export const reducer = (state: AppStateType, action: Actions): typeof initialSta
     }
 
     case ActionType.CLEAR: {
-      localStorage.clear();
+      sessionStorage.clear();
       return initialState;
     }
 
@@ -118,11 +129,15 @@ export const reducer = (state: AppStateType, action: Actions): typeof initialSta
 };
 
 export const Provider = ({ children }: PropsWithChildren) => {
-  const session = JSON.parse(localStorage.getItem(SESSION_KEY) ?? '{}') || ({} as AppStateType);
+  const session = JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? '{}') || ({} as AppStateType);
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     ...session,
   });
+
+  useEffect(() => {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(state));
+  }, [state]);
 
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };

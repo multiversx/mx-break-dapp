@@ -1,8 +1,7 @@
-import { Mnemonic, UserSecretKey, UserSigner } from '@multiversx/sdk-wallet';
+import { UserSigner } from '@multiversx/sdk-wallet';
 import { useEffect, useState } from 'react';
-import { decrypt } from '../helpers/crypto';
-import { useAppProvider } from '../AppContext.tsx';
-import { ENCRIPTION_KEY } from '../const/encription-key.ts';
+import { useAppProvider } from '../AppContext';
+import { getSigner } from '../helpers/getSigner';
 
 const useSigner = () => {
   const { encrypted, address } = useAppProvider();
@@ -14,12 +13,8 @@ const useSigner = () => {
     }
 
     (async () => {
-      const mnemonic = decrypt(encrypted, `${address}${ENCRIPTION_KEY}`);
-
-      const derivedKey = Mnemonic.fromString(mnemonic).deriveKey(0).hex();
-      const secretKey = UserSecretKey.fromString(derivedKey);
-
-      setSigner(new UserSigner(secretKey));
+      const signer = await getSigner(address, encrypted);
+      setSigner(signer);
     })();
   }, [address, encrypted]);
 

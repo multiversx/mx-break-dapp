@@ -2,3 +2,4 @@
 export const apiTimeout = 6000;
 export const transactionSize = 10;
 export const nativeAuth = true;
+export const extrasApi = 'https://extras-api.multiversx.com';

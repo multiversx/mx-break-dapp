@@ -1,10 +1,27 @@
 import { useGenerateWallet } from './hooks/useGenerateWallet.ts';
 import { useAppProvider } from '../../AppContext.tsx';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useState } from 'react';
+import { useFaucet } from './hooks/useFaucet.ts';
+
+const sitekey = '6LeOnY0fAAAAABCn_KfmqldzSsOEOP1JHvdfyYGd';
 
 export const Send = () => {
+  const [captcha, setCaptcha] = useState<string>('');
+  const [requestDisabled, setRequestDisabled] = useState(true);
+
   const { address, balance } = useAppProvider();
 
   const generateWallet = useGenerateWallet();
+  const { claimTokens } = useFaucet();
+
+  const onRecaptchaChange = (value: string | null) => {
+    setRequestDisabled(!value);
+
+    if (value) {
+      setCaptcha(value);
+    }
+  };
 
   return (
     <div className="w-full">
@@ -28,7 +45,14 @@ export const Send = () => {
             <div className="text-gray-400 mb-6">
               <p>Balance: {balance}</p>
             </div>
-            <button onClick={generateWallet} className="bg-blue-500 text-white p-2 rounded-md">
+            <div className="faucet-recaptcha">
+              <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} theme="dark" />
+            </div>
+            <button
+              disabled={requestDisabled}
+              onClick={() => claimTokens(captcha)}
+              className="bg-blue-500 text-white p-2 rounded-md"
+            >
               Claim
             </button>
           </div>
