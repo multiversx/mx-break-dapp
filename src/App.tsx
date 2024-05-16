@@ -4,8 +4,11 @@ import { AppRoutes } from './routes';
 import { Home } from './pages/Home';
 import { Send } from './pages/Send';
 import { PageNotFound } from './pages/PageNotFound';
+import { useBalanceUpdate } from './hooks/useBalanceUpdate';
 
 function App() {
+  useBalanceUpdate();
+
   return (
     <div className="w-full">
       <BrowserRouter>
