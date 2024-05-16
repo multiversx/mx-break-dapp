@@ -12,7 +12,6 @@ export type AppStateType = {
   address?: string;
   encrypted?: string | object;
   balance?: string;
-  claimingTokens?: number;
   sending?: boolean;
   accessToken?: string;
 };
@@ -49,9 +48,6 @@ type ActionPayloadType = {
     encrypted?: string | object;
     accessToken?: string;
   };
-  [ActionType.CLAIM]: {
-    claimingTokens?: number;
-  };
   [ActionType.UPDATE_BALANCE]: {
     balance?: string;
   };
@@ -82,15 +78,6 @@ export const reducer = (state: AppStateType, action: Actions): typeof initialSta
         address,
         encrypted,
         accessToken,
-      };
-    }
-
-    case ActionType.CLAIM: {
-      const { claimingTokens } = action;
-
-      return {
-        ...state,
-        claimingTokens,
       };
     }
 

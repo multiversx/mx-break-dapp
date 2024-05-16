@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppProvider } from '../AppContext';
 import { API_URL } from '../config';
 
@@ -6,8 +6,9 @@ export const useBalanceUpdate = () => {
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
+  const timeout = useRef<NodeJS.Timeout>();
 
-  const { address, claimingTokens, dispatch, actions } = useAppProvider();
+  const { address, dispatch, actions } = useAppProvider();
 
   const updateBalance = useCallback(async () => {
     if (!address) {
@@ -43,7 +44,16 @@ export const useBalanceUpdate = () => {
 
   useEffect(() => {
     updateBalance();
-  }, [claimingTokens, updateBalance]);
+
+    if (timeout.current) {
+      clearInterval(timeout.current);
+    }
+    timeout.current = setInterval(() => {
+      updateBalance();
+    }, 6000);
+
+    return () => clearInterval(timeout.current);
+  }, [updateBalance]);
 
   return { balance, loading, error, updateBalance };
 };

@@ -14,6 +14,9 @@ export const useGenerateWallet = () => {
     const accessToken = await getAccessToken(address, encrypted);
 
     dispatch({
+      type: actions.CLEAR,
+    });
+    dispatch({
       type: actions.GENERATE,
       address,
       encrypted,
