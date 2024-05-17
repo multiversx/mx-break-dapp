@@ -72,7 +72,9 @@ export const Send = () => {
             </div>
           </div>
         </li>
-        <li className="flex flex-col flex-1 rounded-xl bg-white px-6 justify-center">
+        <li
+          className={`flex flex-col flex-1 rounded-xl bg-white px-6 justify-center ${address ? '' : 'disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100'}`}
+        >
           <div
             className={`w-full p-4 ${successfullyClaimedTokens ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
             role="alert"
@@ -115,7 +117,9 @@ export const Send = () => {
             </div>
           </div>
         </li>
-        <li className="flex flex-col flex-1 rounded-xl bg-white px-6 justify-center">
+        <li
+          className={`flex flex-col flex-1 rounded-xl bg-white px-6 justify-center ${address && Number(formattedBalance) > 0.1 ? '' : 'disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100'}`}
+        >
           <div
             className="w-full p-4 text-yellow-500 bg-blue-100 border border-blue-300 rounded-lg dark:bg-gray-800 dark:border-blue-800 dark:text-yellow-500"
             role="alert"
@@ -127,6 +131,12 @@ export const Send = () => {
             <div className="flex flex-col mt-5">
               <div className="flex gap-2">
                 <button
+                  disabled={
+                    !address ||
+                    spamming ||
+                    !successfullyClaimedTokens ||
+                    Number(formattedBalance) < 0.1
+                  }
                   onClick={start}
                   className="flex flex-1 bg-transparent border-2 border-gray-600 p-2 rounded-md align-middle justify-center"
                 >
@@ -138,6 +148,7 @@ export const Send = () => {
                   <span>Start</span>
                 </button>
                 <button
+                  disabled={!spamming}
                   onClick={stop}
                   className="flex flex-1 bg-transparent border-2 border-gray-600 p-2 rounded-md"
                 >
