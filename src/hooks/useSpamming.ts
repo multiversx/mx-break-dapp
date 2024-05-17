@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { useGenerateTransaction } from './useGenerateTransaction.ts';
-import { useSigner } from './useSigner.ts';
-// import { sendSignedTransactions } from 'helpers/transactions/sendSignedTransactions';
-import { useAppProvider } from '../AppContext.tsx';
-import { delay } from 'helpers/delay.ts';
+import { useCallback, useEffect, useState } from 'react';
+import { useGenerateTransaction } from './useGenerateTransaction';
+import { useSigner } from './useSigner';
+import { useAppProvider } from '../AppContext';
+import { delay } from 'helpers/delay';
+import { sendTransaction } from 'helpers/transactions/sendTransaction';
 import { delayBetweenTransactions } from 'config';
 
-const infiniteSpamming = true;
+let infiniteSpamming = true;
+let lastNonce = 0;
 
 export const useSpamming = () => {
   const { nonce } = useAppProvider();
-  const latestNonceRef = useRef(0);
-  const spammingRef = useRef(false);
+  const [spamming, setSpamming] = useState(false);
 
   const { generateTransaction } = useGenerateTransaction();
   const { signer } = useSigner();
@@ -20,17 +20,9 @@ export const useSpamming = () => {
     console.log('spamming');
 
     while (infiniteSpamming) {
-      if (!spammingRef.current) {
-        break;
-      }
+      console.log('lastNonce', lastNonce);
 
-      await delay(delayBetweenTransactions);
-
-      if (nonce >= latestNonceRef.current) {
-        latestNonceRef.current = nonce;
-      }
-
-      const { transaction, serialized } = generateTransaction(latestNonceRef.current++);
+      const { transaction, serialized } = generateTransaction(lastNonce++);
       const signature = await signer?.sign(serialized);
 
       if (!signature) {
@@ -40,25 +32,34 @@ export const useSpamming = () => {
 
       transaction.applySignature(signature);
 
-      console.log('sending transaction', transaction.toPlainObject());
-
-      // const response = await sendSignedTransactions([transaction]);
-
-      // console.log('transaction sent', response);
+      try {
+        await sendTransaction(transaction);
+      } catch (e) {
+        // IGNORE
+      } finally {
+        await delay(delayBetweenTransactions);
+      }
     }
-  }, [generateTransaction, signer, nonce]);
+  }, [generateTransaction, signer]);
 
   const start = () => {
-    spammingRef.current = true;
+    infiniteSpamming = true;
+    setSpamming(true);
     spam();
   };
 
   const stop = () => {
-    spammingRef.current = false;
+    setSpamming(false);
+    infiniteSpamming = false;
   };
 
+  useEffect(() => {
+    console.log('nonce', nonce);
+    lastNonce = nonce;
+  }, [nonce, start]);
+
   return {
-    spamming: spammingRef.current,
+    spamming,
     spam,
     start,
     stop,

@@ -2,11 +2,11 @@ import { useGenerateWallet } from './hooks/useGenerateWallet.ts';
 import { useAppProvider } from '../../AppContext.tsx';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
-import { useFaucet } from './hooks/useFaucet.ts';
+import { useFaucet } from './hooks/useFaucet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faFan, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
-import { useSpamming } from '../../hooks/useSpamming.ts';
+import { useSpamming } from 'hooks/useSpamming';
 
 const sitekey = '6LeOnY0fAAAAABCn_KfmqldzSsOEOP1JHvdfyYGd';
 
@@ -18,7 +18,7 @@ export const Send = () => {
 
   const generateWallet = useGenerateWallet();
   const { claimTokens, claiming } = useFaucet();
-  const { start, stop } = useSpamming();
+  const { start, stop, spamming } = useSpamming();
 
   const formattedBalance = formatAmount({
     input: !balance?.includes('...') ? balance ?? '0' : '0',
@@ -84,8 +84,11 @@ export const Send = () => {
                 onClick={start}
                 className="flex flex-1 bg-blue-500 text-white p-2 rounded-md align-middle justify-center"
               >
-                <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
-                {/*<FontAwesomeIcon icon={faFan} className="fa-1x p-1" spin />*/}
+                {!spamming ? (
+                  <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
+                ) : (
+                  <FontAwesomeIcon icon={faFan} className="fa-1x p-1" spin />
+                )}
                 <span>Start</span>
               </button>
               <button onClick={stop} className="flex flex-1 bg-blue-500 text-white p-2 rounded-md">
