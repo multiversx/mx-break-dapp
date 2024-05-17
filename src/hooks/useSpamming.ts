@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useGenerateTransaction } from './useGenerateTransaction';
-import { useSigner } from './useSigner';
 import { useAppProvider } from '../AppContext';
 import { delay } from 'helpers/delay';
-import { sendTransaction } from 'helpers/transactions/sendTransaction';
+import { sendSignedTransactions } from 'helpers/transactions/sendSignedTransactions';
 import { delayBetweenTransactions } from 'config';
+import { useGenerateSignedTransactions } from './useGenerateSignedTransactions.ts';
 
 let infiniteSpamming = true;
 let lastNonce = 0;
@@ -13,8 +12,7 @@ export const useSpamming = () => {
   const { nonce } = useAppProvider();
   const [spamming, setSpamming] = useState(false);
 
-  const { generateTransaction } = useGenerateTransaction();
-  const { signer } = useSigner();
+  const { generateSignedTransactions } = useGenerateSignedTransactions();
 
   const spam = useCallback(async () => {
     console.log('spamming');
@@ -22,25 +20,17 @@ export const useSpamming = () => {
     while (infiniteSpamming) {
       console.log('lastNonce', lastNonce);
 
-      const { transaction, serialized } = generateTransaction(lastNonce++);
-      const signature = await signer?.sign(serialized);
-
-      if (!signature) {
-        console.log('No signature found');
-        return;
-      }
-
-      transaction.applySignature(signature);
+      const transactions = await generateSignedTransactions(lastNonce++);
 
       try {
-        await sendTransaction(transaction);
+        await sendSignedTransactions(transactions);
       } catch (e) {
         // IGNORE
       } finally {
         await delay(delayBetweenTransactions);
       }
     }
-  }, [generateTransaction, signer]);
+  }, [generateSignedTransactions]);
 
   const start = () => {
     infiniteSpamming = true;

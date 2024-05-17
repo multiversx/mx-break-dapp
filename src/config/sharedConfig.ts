@@ -4,3 +4,4 @@ export const transactionSize = 10;
 export const nativeAuth = true;
 export const extrasApi = 'https://extras-api.multiversx.com';
 export const delayBetweenTransactions = 10;
+export const transactionsBatchSize = 100;

@@ -1,11 +1,18 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppProvider } from '../../../AppContext';
 import { extrasApi } from 'config';
 import { getAccessToken } from 'helpers/accessToken/getAccessToken';
+import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
 export const useFaucet = () => {
   const [claiming, setClaiming] = useState(false);
-  const { address, encrypted, accessToken } = useAppProvider();
+  const [successfullyClaimedTokens, setSuccessfullyClaimedTokens] = useState(false);
+  const { address, encrypted, balance, accessToken } = useAppProvider();
+
+  const formattedBalance = formatAmount({
+    input: !balance?.includes('...') ? balance ?? '0' : '0',
+    decimals: 18,
+  });
 
   const claimTokens = useCallback(
     async (captcha: string) => {
@@ -40,23 +47,33 @@ export const useFaucet = () => {
 
         if (!response.ok) {
           console.error('Failed to claim tokens', response);
-          return false;
+          return;
         }
 
-        alert('Successfully claimed tokens. Check your balance in a few moments.');
-        return true;
+        // alert('Successfully claimed tokens. Check your balance in a few moments.');
+        setSuccessfullyClaimedTokens(() => true);
       } catch (error) {
         console.error('Error claiming tokens', error);
-        return false;
+        setSuccessfullyClaimedTokens(() => true);
       } finally {
-        setClaiming(false);
+        setSuccessfullyClaimedTokens(() => true);
       }
     },
     [accessToken, address, encrypted]
   );
 
+  useEffect(() => {
+    if (successfullyClaimedTokens && Number(formattedBalance) > 1) {
+      setClaiming(false);
+    }
+    if (Number(formattedBalance) > 1) {
+      setSuccessfullyClaimedTokens(true);
+    }
+  }, [formattedBalance, successfullyClaimedTokens]);
+
   return {
     claimTokens,
     claiming,
+    successfullyClaimedTokens,
   };
 };
