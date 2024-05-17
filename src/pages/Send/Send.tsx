@@ -40,9 +40,9 @@ export const Send = () => {
   const showBalance = (!successfullyClaimedTokens && claiming) || showRecaptcha;
 
   return (
-    <div className="w-full p-1 mt-10">
-      <ol className="flex flex-col gap-6 max-w-3xl w-full space-y-4">
-        <li className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
+    <div className="w-full p-1 mt-10 flex justify-center">
+      <ol className="flex flex-col gap-6 max-w-4xl w-full space-y-4">
+        <li className="flex flex-col flex-1 rounded-xl bg-white px-6 justify-center">
           <div
             className={`w-full p-4 ${address ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
             role="alert"
@@ -72,7 +72,7 @@ export const Send = () => {
             </div>
           </div>
         </li>
-        <li className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
+        <li className="flex flex-col flex-1 rounded-xl bg-white px-6 justify-center">
           <div
             className={`w-full p-4 ${successfullyClaimedTokens ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
             role="alert"
@@ -115,7 +115,7 @@ export const Send = () => {
             </div>
           </div>
         </li>
-        <li className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
+        <li className="flex flex-col flex-1 rounded-xl bg-white px-6 justify-center">
           <div
             className="w-full p-4 text-yellow-500 bg-blue-100 border border-blue-300 rounded-lg dark:bg-gray-800 dark:border-blue-800 dark:text-yellow-500"
             role="alert"
