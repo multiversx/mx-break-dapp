@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoutes } from './routes';
-import { Home } from './pages/Home';
+import { Home } from './pages/Home/Home.tsx';
 import { Send } from './pages/Send';
 import { PageNotFound } from './pages/PageNotFound';
 import { useBalanceUpdate } from './hooks/useBalanceUpdate';
