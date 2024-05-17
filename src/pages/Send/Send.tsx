@@ -4,7 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
 import { useFaucet } from './hooks/useFaucet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faFan, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 import { useSpamming } from 'hooks/useSpamming';
 import { CheckmarkSVGIcon } from '../../components/CheckmarSVGIcon.tsx';
@@ -41,8 +41,8 @@ export const Send = () => {
 
   return (
     <div className="w-full p-1 mt-10">
-      <ol className="space-y-4">
-        <li>
+      <ol className="flex flex-col gap-6 max-w-3xl w-full space-y-4">
+        <li className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
           <div
             className={`w-full p-4 ${address ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
             role="alert"
@@ -72,7 +72,7 @@ export const Send = () => {
             </div>
           </div>
         </li>
-        <li>
+        <li className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
           <div
             className={`w-full p-4 ${successfullyClaimedTokens ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
             role="alert"
@@ -115,43 +115,40 @@ export const Send = () => {
             </div>
           </div>
         </li>
-        <li>
+        <li className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
           <div
-            className="w-full p-4 text-blue-700 bg-blue-100 border border-blue-300 rounded-lg dark:bg-gray-800 dark:border-blue-800 dark:text-blue-400"
+            className="w-full p-4 text-yellow-500 bg-blue-100 border border-blue-300 rounded-lg dark:bg-gray-800 dark:border-blue-800 dark:text-yellow-500"
             role="alert"
           >
             <div className="flex items-center justify-between">
-              <span className="sr-only">Social accounts</span>
-              <h3 className="font-medium">3. Social accounts</h3>
-              <CheckmarkSVGIcon />
+              <span className="sr-only">Spamming</span>
+              <h3 className="font-medium">3. Spamming</h3>
+            </div>
+            <div className="flex flex-col mt-5">
+              <div className="flex gap-2">
+                <button
+                  onClick={start}
+                  className="flex flex-1 bg-transparent border-2 border-gray-600 p-2 rounded-md align-middle justify-center"
+                >
+                  {!spamming ? (
+                    <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
+                  ) : (
+                    <FontAwesomeIcon icon={faSpinner} className="fa-1x p-1" spin />
+                  )}
+                  <span>Start</span>
+                </button>
+                <button
+                  onClick={stop}
+                  className="flex flex-1 bg-transparent border-2 border-gray-600 p-2 rounded-md"
+                >
+                  <FontAwesomeIcon icon={faStop} className="fa-1x p-1" />
+                  <span>Stop</span>
+                </button>
+              </div>
             </div>
           </div>
         </li>
       </ol>
-      <div className="flex items-start sm:items-center h-full sm:bg-center">
-        <div className="flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl">
-          <div className="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center">
-            <h2 className="flex text-xl font-medium group">Start spamming</h2>
-            <div className="flex gap-2">
-              <button
-                onClick={start}
-                className="flex flex-1 bg-blue-500 text-white p-2 rounded-md align-middle justify-center"
-              >
-                {!spamming ? (
-                  <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
-                ) : (
-                  <FontAwesomeIcon icon={faFan} className="fa-1x p-1" spin />
-                )}
-                <span>Start</span>
-              </button>
-              <button onClick={stop} className="flex flex-1 bg-blue-500 text-white p-2 rounded-md">
-                <FontAwesomeIcon icon={faStop} className="fa-1x p-1" />
-                <span>Stop</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
