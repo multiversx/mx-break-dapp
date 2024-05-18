@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "start:devnet": "yarn run copy:devnet-config & vite dev",
+    "start:testnet": "yarn run copy:testnet-config & vite dev",
+    "build:devnet": "yarn run copy:devnet-config & vite build",
+    "build:testnet": "yarn run copy:testnet-config & vite build",
+    "copy:devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
+    "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
