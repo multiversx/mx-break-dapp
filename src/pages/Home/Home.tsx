@@ -1,25 +1,19 @@
 import { useGetLatestTps } from './hooks/useGetLatestTps';
-import { useGetHistoricalTps } from './hooks/useGetHistoricalTps.ts';
+import { TrendChart } from '../../components/LineChart/TrendChart.tsx';
 
 export const Home = () => {
   const { tps } = useGetLatestTps();
-  const { tps: historicalTps } = useGetHistoricalTps();
 
   console.log('tps', tps);
-  console.log('historicalTps', historicalTps);
 
   return (
-    <div className="flex flex-1 rounded-xl bg-white p-6 sm:flex-row items-center justify-center">
-      <div className="flex flex-col-reverse sm:flex-row items-center h-full w-full">
-        <div className="flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center">
-          <div className="flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl">
-            <div>
-              <h1>Transactions/sec</h1>
-              {tps ? <p>{Math.round(tps)}</p> : <p>Loading...</p>}
-            </div>
-          </div>
-        </div>
-        <div className="h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center" />
+    <div className="w-full p-1 mt-10 flex justify-center items-center my-auto flex-col gap-64">
+      <div className="flex justify-center flex-col ">
+        <div>Transactions/sec</div>
+        <div>{tps ? <span>{Math.round(tps)}</span> : <span>Loading...</span>}</div>
+      </div>
+      <div className="w-full flex justify-center mx-auto text-xs">
+        <TrendChart />
       </div>
     </div>
   );
