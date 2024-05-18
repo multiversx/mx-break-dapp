@@ -6,7 +6,7 @@ export const Home = () => {
   console.log('tps', tps);
 
   return (
-    <div className="w-full p-1 mt-10 flex justify-center items-center my-auto flex-col gap-64">
+    <div className="w-full p-1 mt-10 flex justify-center items-center my-auto flex-col gap-12">
       <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
         <div className="flex justify-between">
           <div>
