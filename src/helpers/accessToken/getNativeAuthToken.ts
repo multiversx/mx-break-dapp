@@ -40,7 +40,6 @@ export async function getNativeAuthToken(
       tokenLogin,
       Buffer.from(message.signature).toString('hex')
     );
-    console.log(accessToken);
     return accessToken;
   } catch (error) {
     console.error('failed generating new token', error);

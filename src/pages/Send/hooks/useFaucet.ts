@@ -17,17 +17,17 @@ export const useFaucet = () => {
   const claimTokens = useCallback(
     async (captcha: string) => {
       if (!address) {
-        console.log('No address found');
+        console.error('No address found');
         return false;
       }
 
       if (!encrypted) {
-        console.log('No encrypted wallet found');
+        console.error('No encrypted wallet found');
         return false;
       }
 
       if (!captcha) {
-        console.log('No captcha found');
+        console.error('No captcha found');
         return false;
       }
 

@@ -24,7 +24,7 @@ export const useGenerateSignedTransactions = () => {
 
         const signature = await signer?.sign(serialized);
         if (!signature) {
-          console.log('No signature found');
+          console.error('No signature found');
           continue;
         }
         transaction.applySignature(signature);

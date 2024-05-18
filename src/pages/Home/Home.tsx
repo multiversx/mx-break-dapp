@@ -3,7 +3,6 @@ import { useGetLatestTps } from './hooks/useGetLatestTps.ts';
 
 export const Home = () => {
   const { tps } = useGetLatestTps();
-  console.log('tps', tps);
 
   return (
     <div className="w-full p-1 mt-10 flex justify-center items-center my-auto flex-col gap-12">

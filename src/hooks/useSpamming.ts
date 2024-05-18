@@ -15,11 +15,7 @@ export const useSpamming = () => {
   const { generateSignedTransactions } = useGenerateSignedTransactions();
 
   const spam = useCallback(async () => {
-    console.log('spamming');
-
     while (infiniteSpamming) {
-      console.log('lastNonce', lastNonce);
-
       const transactions = await generateSignedTransactions(lastNonce++);
 
       try {
@@ -44,7 +40,6 @@ export const useSpamming = () => {
   };
 
   useEffect(() => {
-    console.log('nonce', nonce);
     lastNonce = nonce;
   }, [nonce, start]);
 
