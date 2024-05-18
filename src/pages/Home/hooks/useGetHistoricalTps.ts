@@ -21,8 +21,15 @@ export const useGetHistoricalTps = () => {
         return;
       }
 
-      const data = await response.json();
-      setTps(() => data);
+      const data = (await response.json()) as { tps: number; timestamp: number }[];
+      setTps((prevState) => {
+        const latestTimestamp = prevState[prevState.length - 1]?.timestamp;
+
+        if (!latestTimestamp) return data;
+
+        const difference = data.filter((x) => x.timestamp > latestTimestamp);
+        return [...prevState, ...difference];
+      });
     } catch (error) {
       console.error('Error getting historical TPS', error);
     }
@@ -32,7 +39,7 @@ export const useGetHistoricalTps = () => {
     getHistoricalTps();
     const interval = setInterval(() => {
       getHistoricalTps();
-    }, 30000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [getHistoricalTps]);

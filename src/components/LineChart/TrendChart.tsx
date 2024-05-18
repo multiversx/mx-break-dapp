@@ -1,4 +1,4 @@
-import { useEffect, useRef, Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   CartesianGrid,
   YAxis,
@@ -11,36 +11,19 @@ import {
 import { useGetHistoricalTps } from 'pages/Home/hooks/useGetHistoricalTps.ts';
 import moment from 'moment';
 
-// const ENDPOINT = "http://127.0.0.1:4001";
-
 export function TrendChart() {
-  // const timeoutRef = useRef<NodeJS.Timeout>();
   const { tps: chartData, getHistoricalTps } = useGetHistoricalTps();
 
-  // useEffect(() => {
-  //   if (timeoutRef.current !== null) {
-  //     clearTimeout(timeoutRef.current);
-  //   }
-  //   const interval = 6000;
-  //   const speed = 1000;
-  //   for (let i = 0; i < interval; i++) {
-  //     timeoutRef.current = setTimeout(() => {
-  //       clearTimeout(timeoutRef.current);
-  //       getHistoricalTps();
-  //     }, i * speed);
-  //   }
-  // }, [getHistoricalTps]);
-
   return (
-    <div className="w-full flex flex-col">
-      <button onClick={getHistoricalTps}>Get new historical data</button>
-      <div className="w-full h-80 p-10 mt-10 flex justify-center items-center my-auto flex-col gap-64">
+    <div className="w-full flex flex-col bg-gray-800">
+      {import.meta.env.DEV && <button onClick={getHistoricalTps}>Get new historical data</button>}
+      <div className="w-full h-96 p-10 mt-10 flex justify-center items-center my-auto flex-col gap-64">
         <ResponsiveContainer>
           <ComposedChart data={chartData}>
             <defs>
               <linearGradient id="tps-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="red" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="red" stopOpacity={0} />
+                <stop offset="5%" stopColor="#0ac2ae" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#0ac2ae" stopOpacity={0} />
               </linearGradient>
             </defs>
             <defs>
@@ -58,6 +41,7 @@ export function TrendChart() {
               tickFormatter={(tick) => moment.unix(tick).utc().format('hh:mm:ss')}
               strokeWidth={0.3}
               tickMargin={15}
+              stroke={'#ffffff'}
             />
 
             <Fragment key={`y-axis-chart-tps`}>
@@ -66,7 +50,7 @@ export function TrendChart() {
                 tickFormatter={(tick) => (Math.round(tick * 100) / 100).toString()}
                 axisLine={false}
                 tickLine={false}
-                stroke={'red'}
+                stroke={'#0ac2ae'}
                 dy={2}
                 domain={[0, 'dataMax']}
                 tickCount={10}
@@ -74,24 +58,22 @@ export function TrendChart() {
               <Area
                 type="monotone"
                 dataKey={'tps'}
-                stroke={'green'}
+                stroke={'#0ac2ae'}
                 {...{ fill: `url(#tps-gradient)` }}
                 strokeWidth={1.5}
                 activeDot={{
-                  stroke: 'red',
-                  fill: 'red',
+                  stroke: '#0ac2ae',
+                  fill: '#0ac2ae',
                 }}
                 visibility="visible"
                 isAnimationActive={false}
-                // animationEasing={'linear'}
-                // animationDuration={1000}
               />
             </Fragment>
             <Tooltip
               content={(props) => {
                 return (
-                  <div className="recharts-tooltip-label text-neutral-800">
-                    <span>
+                  <div className="rounded-lg bg-gray-900 py-3 px-6 text-left align-middle font-sans text-xs font-bold uppercase shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-neutral-200">
+                    <span className="border-b-2 p-b-4">
                       {props.payload?.[0]?.payload?.timestamp
                         ? moment
                             .unix(props.payload[0].payload.timestamp)
@@ -102,15 +84,15 @@ export function TrendChart() {
                     <div>
                       <ul className="recharts-tooltip-item-list list-unstyled">
                         {props.payload?.map((entry) => {
-                          const displayValue = entry.value;
+                          const displayValue = Math.round(Number(entry.value) * 100) / 100;
                           return (
                             <li
                               key={entry.name}
                               style={{ textAlign: 'start' }}
-                              className="d-flex flex-column"
+                              className="d-flex flex-column mt-3"
                             >
-                              <span className="item-label">{`${entry.name}`}</span>
-                              <span className="item-value">{displayValue}</span>
+                              <span className="">{`${entry.name}`}:</span>
+                              <span className="ml-2">{displayValue}</span>
                             </li>
                           );
                         })}
