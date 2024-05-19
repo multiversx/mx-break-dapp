@@ -42,9 +42,9 @@ export const Send = () => {
   return (
     <div className="w-full p-1 mt-10 flex justify-center">
       <ol className="flex flex-col gap-6 max-w-4xl w-full space-y-4">
-        <li className="flex flex-col flex-1 rounded-xl bg-white px-6 justify-center">
+        <li className="flex flex-col flex-1 rounded-xl bg-neutral-950 px-6 justify-center">
           <div
-            className={`w-full p-4 ${address ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
+            className={`w-full p-4 ${address ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} rounded-lg dark:bg-neutral-950`}
             role="alert"
           >
             <div className="flex items-center justify-between">
@@ -73,10 +73,10 @@ export const Send = () => {
           </div>
         </li>
         <li
-          className={`flex flex-col flex-1 rounded-xl bg-white px-6 justify-center ${address ? '' : 'disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100'}`}
+          className={`flex flex-col flex-1 rounded-xl bg-neutral-950 px-6 justify-center ${address ? '' : 'disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100'}`}
         >
           <div
-            className={`w-full p-4 ${successfullyClaimedTokens ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:border-green-800 `}
+            className={`w-full p-4 ${successfullyClaimedTokens ? 'text-green-700 dark:text-green-400' : 'text-gray-100 dark:text-gray-100'} rounded-lg dark:bg-neutral-950`}
             role="alert"
           >
             <div className="flex items-center justify-between">
@@ -118,12 +118,9 @@ export const Send = () => {
           </div>
         </li>
         <li
-          className={`flex flex-col flex-1 rounded-xl bg-white px-6 justify-center ${address && Number(formattedBalance) > 0.1 ? '' : 'disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100'}`}
+          className={`flex flex-col flex-1 rounded-xl bg-neutral-950 px-6 justify-center ${address && Number(formattedBalance) > 0.1 ? '' : 'disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100'}`}
         >
-          <div
-            className="w-full p-4 text-yellow-500 bg-blue-100 border border-blue-300 rounded-lg dark:bg-gray-800 dark:border-blue-800 dark:text-yellow-500"
-            role="alert"
-          >
+          <div className="w-full p-4 text-yellow-500 rounded-lg dark:bg-neutral-950" role="alert">
             <div className="flex items-center justify-between">
               <span className="sr-only">Spamming</span>
               <h3 className="font-medium">3. Spamming</h3>
