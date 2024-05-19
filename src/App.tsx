@@ -11,7 +11,7 @@ function App() {
   useBalanceUpdate();
 
   return (
-    <div className="w-full">
+    <div className="w-full h-screen overflow-auto bg-body-bg">
       <BrowserRouter>
         <Header />
         <Routes>

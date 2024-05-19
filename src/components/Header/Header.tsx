@@ -4,7 +4,7 @@ import { Logo } from '../Logo.tsx';
 
 export const Header = () => {
   return (
-    <header className="flex flex-row align-center justify-between p-6 border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+    <header className="flex flex-row align-center justify-between p-6 border-gray-200 bg-black dark:bg-black dark:border-gray-700">
       <Link className="flex items-center justify-between" to={AppRoutes.HOME}>
         <Logo />
       </Link>

@@ -15,9 +15,9 @@ export function TrendChart() {
   const { tps: chartData, getHistoricalTps } = useGetHistoricalTps();
 
   return (
-    <div className="w-full flex flex-col bg-gray-800">
+    <div className="w-full flex flex-col bg-neutral-950">
       {import.meta.env.DEV && <button onClick={getHistoricalTps}>Get new historical data</button>}
-      <div className="w-full h-96 p-10 mt-10 flex justify-center items-center my-auto flex-col gap-64">
+      <div className="w-full h-96 sm:h-80 sm:gap-32 sm:p-1 sm:mt-1 flex justify-center items-center my-auto flex-col gap-64">
         <ResponsiveContainer>
           <ComposedChart data={chartData}>
             <defs>

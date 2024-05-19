@@ -1,23 +1,28 @@
 import { TrendChart } from '../../components/TrendChart/TrendChart.tsx';
 import { useGetLatestTps } from './hooks/useGetLatestTps.ts';
+import { Speedometer } from '../../components/Speedometer/Speedometer.tsx';
 
 export const Home = () => {
   const { tps } = useGetLatestTps();
 
   return (
-    <div className="w-full p-1 mt-10 flex justify-center items-center my-auto flex-col gap-12">
-      <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-        <div className="flex justify-between">
-          <div>
-            <h5 className="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
-              TPS {tps > 0 ? tps.toFixed(2) : tps}
-            </h5>
-            <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-              in the last 30 seconds
-            </p>
+    <div className="w-full mt-10 flex p-6 my-auto flex-col gap-12">
+      <div className="flex gap-12 flex-wrap">
+        <div className="max-w-sm w-full rounded-lg shadow dark:bg-neutral-950 p-4 md:p-6 flex">
+          <div className="flex justify-between">
+            <div className="flex-1">
+              <h5 className="leading-none text-3xl font-bold dark:text-teal pb-2">
+                TPS {tps > 0 ? tps.toFixed(2) : tps}
+              </h5>
+              <p className="font-normal text-xs dark:text-teal">in the last 30 seconds</p>
+            </div>
           </div>
         </div>
+        <div className="max-w-sm w-full rounded-lg shadow dark:bg-neutral-950 p-4 md:p-6 flex">
+          <Speedometer speed={tps} />
+        </div>
       </div>
+
       <div className="w-full flex justify-center mx-auto text-xs">
         <TrendChart />
       </div>
