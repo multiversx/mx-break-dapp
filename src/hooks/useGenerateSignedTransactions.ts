@@ -12,6 +12,7 @@ export const useGenerateSignedTransactions = () => {
 
   const generateSignedTransactions = useCallback(
     async (nonce: number) => {
+      const generatedTransactions: { transaction: Transaction; serialized: Buffer }[] = [];
       const signedTransactions: Transaction[] = [];
 
       if (!address) {
@@ -20,17 +21,25 @@ export const useGenerateSignedTransactions = () => {
       }
 
       for (let i = 0; i < transactionsBatchSize; i++) {
-        const { transaction, serialized } = generateTransaction(nonce + i);
-
-        const signature = await signer?.sign(serialized);
-        if (!signature) {
-          console.error('No signature found');
-          continue;
-        }
-        transaction.applySignature(signature);
-
-        signedTransactions.push(transaction);
+        generatedTransactions.push(generateTransaction(nonce + i));
       }
+
+      const signedTransactionsPromises = generatedTransactions.map(({ serialized }) =>
+        signer?.sign(serialized)
+      );
+
+      const signatures = await Promise.all(signedTransactionsPromises);
+
+      signedTransactions.push(
+        ...generatedTransactions.map(({ transaction }, index) => {
+          const signature = signatures[index];
+
+          if (signature) {
+            transaction.applySignature(signature);
+          }
+          return transaction;
+        })
+      );
 
       return signedTransactions;
     },

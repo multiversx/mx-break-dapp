@@ -64,7 +64,7 @@ export const Speedometer = ({ speed }: { speed: number }) => {
             id="counter"
             className="text-grey-darkest text-center text-base font-semibold pt-4 pb-0"
           >
-            {counter.toFixed(2)} Tps
+            {(counter * 100).toFixed(2)} Tps
           </div>
         </div>
       </div>
