@@ -1,13 +1,13 @@
 import { useAppProvider } from '../AppContext.tsx';
 import { useCallback } from 'react';
 import { Transaction } from '@multiversx/sdk-core/out';
-import { useGenerateTransaction } from './useGenerateTransaction';
+import { useGenerateBaseTransaction } from './useGenerateBaseTransaction.ts';
 import { useSigner } from './useSigner';
 import { transactionsBatchSize } from 'config';
 
 export const useGenerateSignedTransactions = () => {
   const { address } = useAppProvider();
-  const { generateTransaction } = useGenerateTransaction();
+  const { generateTransaction } = useGenerateBaseTransaction();
   const { signer } = useSigner();
 
   const generateSignedTransactions = useCallback(
