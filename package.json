@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "start": "vite",
+    "start:sovereign": "yarn run copy:sovereign-config & vite dev",
     "start:devnet": "yarn run copy:devnet-config & vite dev",
     "start:testnet": "yarn run copy:testnet-config & vite dev",
+    "build:sovereign": "yarn run copy:sovereign-config & vite build",
     "build:devnet": "yarn run copy:devnet-config & vite build",
     "build:testnet": "yarn run copy:testnet-config & vite build",
+    "copy:sovereign-config": "cp ./src/config/config.sovereign.ts ./src/config/index.ts",
     "copy:devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

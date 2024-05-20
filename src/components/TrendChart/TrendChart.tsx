@@ -72,8 +72,8 @@ export function TrendChart() {
             <Tooltip
               content={(props) => {
                 return (
-                  <div className="rounded-lg bg-gray-900 py-3 px-6 text-left align-middle font-sans text-xs font-bold uppercase shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-neutral-200">
-                    <span className="border-b-2 p-b-4">
+                  <div className="rounded-lg bg-black py-3 px-6 text-left align-middle font-sans text-xs font-bold uppercase shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-neutral-200">
+                    <span className="text-gray-400">
                       {props.payload?.[0]?.payload?.timestamp
                         ? moment
                             .unix(props.payload[0].payload.timestamp)
@@ -82,14 +82,14 @@ export function TrendChart() {
                         : 'label'}
                     </span>
                     <div>
-                      <ul className="recharts-tooltip-item-list list-unstyled">
+                      <ul className="recharts-tooltip-item-list list-unstyled font-mono">
                         {props.payload?.map((entry) => {
                           const displayValue = Math.round(Number(entry.value) * 100) / 100;
                           return (
                             <li
                               key={entry.name}
                               style={{ textAlign: 'start' }}
-                              className="d-flex flex-column mt-3"
+                              className="d-flex flex-column mt-1"
                             >
                               <span className="">{`${entry.name}`}:</span>
                               <span className="ml-2">{displayValue}</span>

@@ -1,38 +1,31 @@
 import { useCallback, useEffect, useState } from 'react';
 import './Speedometer.css';
 
+const minValue = 0;
+const maxValue = 100_000;
+const minAngle = -90;
+const maxAngle = 90;
+
 export const Speedometer = ({ speed }: { speed: number }) => {
   const [arrowStyle, setArrowStyle] = useState({});
   const [counter, setCounter] = useState(0);
 
+  // Compute the angle using linear interpolation within the range
   const calcAngle = (value: number) => {
-    let angle = -90;
-    value = value / 100;
-
-    if (value < 0.1) {
-      angle = (value / 0.1) * 60 - 90;
-    } else if (value > 0.1 && value < 0.5) {
-      angle = (value / 0.5) * 90 - 90;
-    } else if (value > 0.5 && value <= 0.9) {
-      angle = (value / 0.9) * 30;
-    } else {
-      angle = (value / 1) * 90;
+    if (value <= minValue) {
+      return minAngle;
+    }
+    if (value > maxValue) {
+      return maxAngle;
     }
 
-    return Math.round(angle);
+    // Compute the proportion of the value within the range
+    const proportion = (value - minValue) / (maxValue - minValue);
 
-    // let angle = -90;
-    // if (value < 1.5) {
-    //   angle = (value / 1.5) * 60 - 90;
-    // } else if (value > 1.5 && value < 6.5) {
-    //   angle = (value / 6.5) * 90 - 90;
-    // } else if (value > 6.5 && value < 15) {
-    //   angle = (value / 15) * 30;
-    // } else {
-    //   angle = (value / 15) * 90;
-    // }
-    //
-    // return Math.round(angle);
+    // Compute the corresponding angle within the angle range
+    const angle = minAngle + proportion * (maxAngle - minAngle);
+
+    return Math.round(angle);
   };
 
   const refreshSpeedOMeter = useCallback(() => {
@@ -66,7 +59,7 @@ export const Speedometer = ({ speed }: { speed: number }) => {
             id="counter"
             className="text-grey-darkest text-center text-base font-semibold pt-4 pb-0"
           >
-            {(counter * 100).toFixed(0)} Tps
+            {Math.round(counter)} Tps
           </div>
         </div>
       </div>

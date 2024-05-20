@@ -12,7 +12,7 @@ export const Home = () => {
           <div className="flex justify-between">
             <div className="flex-1">
               <h5 className="leading-none text-3xl font-bold dark:text-teal pb-2">
-                TPS {tps > 0 ? (tps * 100).toFixed(0) : tps}
+                TPS {Math.round(tps)}
               </h5>
               <p className="font-normal text-xs dark:text-teal">in the last 30 seconds</p>
             </div>
