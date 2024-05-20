@@ -7,6 +7,8 @@ export const Speedometer = ({ speed }: { speed: number }) => {
 
   const calcAngle = (value: number) => {
     let angle = -90;
+    value = value / 100;
+
     if (value < 0.1) {
       angle = (value / 0.1) * 60 - 90;
     } else if (value > 0.1 && value < 0.5) {
@@ -64,7 +66,7 @@ export const Speedometer = ({ speed }: { speed: number }) => {
             id="counter"
             className="text-grey-darkest text-center text-base font-semibold pt-4 pb-0"
           >
-            {(counter * 100).toFixed(2)} Tps
+            {(counter * 100).toFixed(0)} Tps
           </div>
         </div>
       </div>

@@ -14,20 +14,21 @@
 }
 
 .speedometer .scale.low {
-    top: 10px;
-    left: -30px;
+    top: 35px;
+    left: -25px;
     border-color: #e74c3c;
     transform: rotate(-50deg);
     transform-origin: top right;
 }
 
 .speedometer .scale.middle {
-    left: calc(50% - 37px);
+    top: 20px;
+    left: calc(50% - 30px);
     border-color: #f1c40f;
 }
 
 .speedometer .scale.height {
-    top: 10px;
+    top: 35px;
     right: -30px;
     transform: rotate(50deg);
     transform-origin: top left;
