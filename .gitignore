@@ -23,3 +23,5 @@ build
 *.njsproj
 *.sln
 *.sw?
+
+src/config/index.ts

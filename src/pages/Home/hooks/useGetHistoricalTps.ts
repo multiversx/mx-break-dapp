@@ -4,7 +4,7 @@ import { API_URL } from 'config';
 
 export const useGetHistoricalTps = () => {
   const [tps, setTps] = useState<{ tps: number; timestamp: number }[]>([]);
-  const { accessToken } = useAppProvider();
+  const { accessToken, address, encrypted } = useAppProvider();
 
   const getHistoricalTps = useCallback(async () => {
     try {
@@ -12,7 +12,6 @@ export const useGetHistoricalTps = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -33,7 +32,7 @@ export const useGetHistoricalTps = () => {
     } catch (error) {
       console.error('Error getting historical TPS', error);
     }
-  }, [accessToken]);
+  }, [accessToken, address, encrypted]);
 
   useEffect(() => {
     getHistoricalTps();

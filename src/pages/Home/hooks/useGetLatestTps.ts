@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useAppProvider } from '../../../AppContext';
 import { API_URL } from 'config';
 
 export const useGetLatestTps = () => {
   const [tps, setTps] = useState<number>(0);
-  const { accessToken } = useAppProvider();
 
   const getLatestTps = useCallback(async () => {
     try {
@@ -12,7 +10,6 @@ export const useGetLatestTps = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -26,7 +23,7 @@ export const useGetLatestTps = () => {
     } catch (error) {
       console.error('Error getting latest TPS', error);
     }
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
     getLatestTps();
