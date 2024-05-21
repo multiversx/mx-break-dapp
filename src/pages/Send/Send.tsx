@@ -92,7 +92,7 @@ export const Send = () => {
                 </div>
                 <div className="text-gray-200">
                   <span className="font-medium max-w-50 text-wrap break-all">
-                    {formattedBalance} xEGLD
+                    {formattedBalance} EGLD
                   </span>
                 </div>
               </div>

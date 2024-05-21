@@ -16,27 +16,27 @@ export const useSpamming = () => {
   const { nonce } = useAppProvider();
   const [spamming, setSpamming] = useState(false);
   const infiniteSpamming = useRef(true);
-  const latestNonceRef = useRef(0);
+  const latestNonceRef = useRef(nonce);
+  const startSignatureNonceRef = useRef(nonce);
   const failedTransactionsRef = useRef<Transaction[]>([]);
 
   const { generateSignedTransaction } = useGenerateSignedTransaction();
 
   const generateSignatures = useCallback(async () => {
-    let startNonce = nonce;
     while (infiniteSpamming.current) {
       try {
-        const cached = await generateSignedTransaction(startNonce++);
+        const cached = await generateSignedTransaction(startSignatureNonceRef.current++);
 
         if (getSignatureCache()[cached.nonce]) {
           continue;
         }
 
-        console.log({ cached });
+        console.log({ cache: getSignatureCache() });
         setSignature(cached.nonce, cached.transaction);
       } catch (e) {
         // IGNORE
       } finally {
-        await delay(5);
+        await delay(1);
       }
     }
   }, [generateSignedTransaction, nonce]);
@@ -75,7 +75,7 @@ export const useSpamming = () => {
   const spam = useCallback(async () => {
     while (infiniteSpamming.current) {
       const batch = getNextBatch();
-      console.log({ batch });
+      console.log({ lastNonce: latestNonceRef.current, batch });
 
       try {
         await sendSignedTransactions(batch);
@@ -92,13 +92,18 @@ export const useSpamming = () => {
     infiniteSpamming.current = true;
     setSpamming(true);
     generateSignatures();
-    spam();
+
+    // gives time for the signatures to be generated
+    setTimeout(() => {
+      spam();
+    }, 1000);
     // retryFailedTransactions();
   };
 
   const stop = () => {
     setSpamming(false);
     infiniteSpamming.current = false;
+    latestNonceRef.current = nonce;
   };
 
   useEffect(() => {
