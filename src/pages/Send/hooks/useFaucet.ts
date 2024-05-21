@@ -33,6 +33,7 @@ export const useFaucet = () => {
 
       setClaiming(true);
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const bearerToken = accessToken || (await getAccessToken(address, encrypted));
 
       try {
@@ -40,9 +41,9 @@ export const useFaucet = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${bearerToken}`,
+            // Authorization: `Bearer ${bearerToken}`,
           },
-          body: JSON.stringify({ captcha }),
+          body: JSON.stringify({ address, captcha }),
         });
 
         if (!response.ok) {
