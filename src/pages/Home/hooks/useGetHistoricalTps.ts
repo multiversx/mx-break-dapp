@@ -47,7 +47,7 @@ export const useGetHistoricalTps = () => {
     } catch (error) {
       console.error('Error getting historical TPS', error);
     }
-  }, [accessToken]);
+  }, [accessToken, address, encrypted]);
 
   useEffect(() => {
     getHistoricalTps();

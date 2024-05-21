@@ -40,7 +40,7 @@ export const useGetLatestTps = () => {
     } catch (error) {
       console.error('Error getting latest TPS', error);
     }
-  }, [accessToken]);
+  }, [accessToken, address, encrypted]);
 
   useEffect(() => {
     getLatestTps();
