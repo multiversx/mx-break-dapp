@@ -34,13 +34,14 @@ export const useFaucet = () => {
       setClaiming(true);
 
       const bearerToken = accessToken || (await getAccessToken(address, encrypted));
+      const useNativeAuth = API_URL.includes('devnet-') || API_URL.includes('testnet-');
 
       try {
         const response = await fetch(`${extrasApi}/faucet`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: API_URL.includes('devnet-') ? `Bearer ${bearerToken}` : '',
+            Authorization: useNativeAuth ? `Bearer ${bearerToken}` : '',
           },
           body: JSON.stringify({ address, captcha }),
         });
