@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAppProvider } from '../../../AppContext';
-import { extrasApi } from 'config';
+import { API_URL, extrasApi } from 'config';
 import { getAccessToken } from 'helpers/accessToken/getAccessToken';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
@@ -33,7 +33,6 @@ export const useFaucet = () => {
 
       setClaiming(true);
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const bearerToken = accessToken || (await getAccessToken(address, encrypted));
 
       try {
@@ -41,7 +40,7 @@ export const useFaucet = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            // Authorization: `Bearer ${bearerToken}`,
+            Authorization: API_URL.includes('devnet-') ? `Bearer ${bearerToken}` : '',
           },
           body: JSON.stringify({ address, captcha }),
         });
