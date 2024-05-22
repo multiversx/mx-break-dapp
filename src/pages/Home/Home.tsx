@@ -1,5 +1,5 @@
 import { TrendChart } from '../../components/TrendChart/TrendChart.tsx';
-import { useGetLatestTps } from './hooks/useGetLatestTps.ts';
+import { useGetLatestTps } from '../../hooks/useGetLatestTps.ts';
 import { Speedometer } from '../../components/Speedometer/Speedometer.tsx';
 
 export const Home = () => {

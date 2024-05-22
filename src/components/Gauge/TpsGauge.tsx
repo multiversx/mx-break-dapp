@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGauge } from 'use-gauge';
 import { motion, MotionConfig } from 'framer-motion';
-import { useGetLatestTps } from '../../pages/Home/hooks/useGetLatestTps.ts';
+import { useGetLatestTps } from '../../hooks/useGetLatestTps.ts';
 // import CenterIcon from '../../assets/06.svg?react';
 
 const START_ANGLE = 70;
