@@ -2,11 +2,9 @@ import { ReactNode } from 'react';
 
 export const Stat = ({ children, title }: { children: ReactNode; title: string }) => {
   return (
-    <div className="w-full flex flex-col items-start justify-center max-w-sm p-6 bg-white border-2 border-neutral-800 rounded-lg shadow dark:bg-black">
-      <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-        {title}
-      </h5>
-      <div className="flex sm:flex-col">{children}</div>
+    <div className="w-full md:max-w-xs flex flex-col items-start justify-center p-6 border border-neutral-800 rounded-2xl gap-4">
+      <h5 className="font-semibold tracking-tight text-neutral-400">{title}</h5>
+      <div className="text-2xl">{children}</div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ export const TotalTransactions = () => {
   if (error) {
     return (
       <Stat title="Total Transactions">
-        <div className="text-neutral-500 text-3xl">Error</div>
+        <div className="text-neutral-300">Error</div>
       </Stat>
     );
   }
@@ -21,14 +21,14 @@ export const TotalTransactions = () => {
   if (pending && !mountedRef.current) {
     return (
       <Stat title="Total Transactions">
-        <div className="text-neutral-500 text-3xl">Loading...</div>
+        <div className="text-neutral-300">Loading...</div>
       </Stat>
     );
   }
 
   return (
     <Stat title="Total Transactions">
-      <div className="text-neutral-500 text-3xl">{totalTransactions.toLocaleString()}</div>
+      <div className="text-neutral-300">{totalTransactions.toLocaleString()}</div>
     </Stat>
   );
 };
