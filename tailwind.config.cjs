@@ -7,7 +7,8 @@ module.exports = {
         sans: ['"Inter"', 'sans-serif']
       },
       colors: {
-        'body-bg': '#171717',
+        // 'body-bg': '#171717',
+        'body-bg': '#020203',
         teal: '#00FFD1',
         // gray: {
         //     50: '#171717;',

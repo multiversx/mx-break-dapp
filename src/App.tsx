@@ -6,6 +6,7 @@ import { Send } from './pages/Send';
 import { PageNotFound } from './pages/PageNotFound';
 import { useBalanceUpdate } from './hooks/useBalanceUpdate';
 import { Header } from './components/Header';
+import { New } from 'pages/New';
 
 function App() {
   useBalanceUpdate();
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path={AppRoutes.NEW} element={<New />} />
           <Route path={AppRoutes.HOME} element={<Home />} />
           <Route path={AppRoutes.SEND} element={<Send />} />
           <Route path="*" element={<PageNotFound />} />
