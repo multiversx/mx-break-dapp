@@ -14,11 +14,11 @@ export const New = () => {
         with Sovereign Speed
       </div>
 
-      <div className="gap-3 text-center p-6">
+      <div className="gap-3 text-center p-6 md:p-6">
         <TspGauge />
       </div>
 
-      <div className="w-full relative flex flex-col md:flex-row justify-end gap-4 mt-16 md:mt-32">
+      <div className="w-full relative md:flex md:flex-row md:justify-end md:gap-4 mt-0 md:mt-32">
         <TrendChart />
         <div className="flex-1 flex flex-col md:flex-row gap-2 md:gap-5 p-4 md:p-0">
           <TotalTransactions />
