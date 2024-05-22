@@ -21,7 +21,7 @@
   }
 
   .scrollbar-thin {
-    scrollbar-width: thin;
+    /* scrollbar-width: thin; */
 
     &:hover {
       --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
