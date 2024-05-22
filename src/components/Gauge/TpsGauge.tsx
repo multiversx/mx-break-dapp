@@ -9,7 +9,7 @@ const END_ANGLE = 290;
 const MAX_SPEED = 60_000;
 
 // Remove the normalization factor to get the actual TPS
-const NORMALIZATION_FACTOR_TO_BE_REMOVED = 10_000;
+const NORMALIZATION_FACTOR_TO_BE_REMOVED = 1; // 10_000;
 
 const useSpeedTest = () => {
   const { tps } = useGetLatestTps();
@@ -18,7 +18,7 @@ const useSpeedTest = () => {
     return 0;
   }
 
-  if (tps > MAX_SPEED) {
+  if (tps >= MAX_SPEED) {
     return MAX_SPEED;
   }
 
