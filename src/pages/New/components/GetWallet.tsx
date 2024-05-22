@@ -46,7 +46,7 @@ export const GetWallet = () => {
               </button>
             </div>
             <div className="flex items-center py-2 text-gray-200 text-xs break-all rounded-3xl p-2 bg-neutral-800">
-              <div className="m-0 p-0">
+              <div className="m-0 ml-2 p-0">
                 <Trim text={address} />
               </div>
               <div className="ml-2 flex flex-nowrap min-w-32">
