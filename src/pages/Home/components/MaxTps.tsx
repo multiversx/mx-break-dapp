@@ -13,7 +13,7 @@ export const MaxTps = () => {
   if (error) {
     return (
       <Stat title="Max TPS">
-        <div className="text-neutral-500 text-3xl">Error</div>
+        <div className="text-neutral-300">Error</div>
       </Stat>
     );
   }
@@ -21,14 +21,14 @@ export const MaxTps = () => {
   if (pending && !mountedRef.current) {
     return (
       <Stat title="Max TPS">
-        <div className="text-neutral-500 text-3xl">Loading...</div>
+        <div className="text-neutral-300">Loading...</div>
       </Stat>
     );
   }
 
   return (
     <Stat title="Max TPS">
-      <div className="text-red-500 text-3xl">{maxTps.toLocaleString()}</div>
+      <div className="text-red-500">{maxTps.toLocaleString()}</div>
     </Stat>
   );
 };

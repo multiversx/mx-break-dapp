@@ -12,7 +12,8 @@ function App() {
   useBalanceUpdate();
 
   return (
-    <div className="w-full h-screen overflow-auto bg-body-bg">
+    /*<div className="w-full h-screen bg-body-bg overflow-auto">*/
+    <div className="w-full h-screen overflow-auto bg-body-bg bg-[url('/src/assets/hero.png')] bg-top bg-no-repeat md:bg-[url('/src/assets/hero.png')] bg-cover scrollbar-thin">
       <BrowserRouter>
         <Header />
         <Routes>

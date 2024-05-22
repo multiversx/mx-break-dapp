@@ -6,17 +6,18 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-10 backdrop-blur-md">
-      <nav className="container-page flex items-center gap-1 py-3 sm:gap-x-6 sm:py-4 mx-6 sm:mx-2">
-        <Link className="flex items-center justify-between" to={AppRoutes.HOME}>
+    <header className="---sticky top-0 z-10 p-4 md:p-14">
+      <nav className="flex items-center justify-between gap-2 sm:gap-x-6">
+        <Link className="flex items-center" to={AppRoutes.HOME}>
           <Logo />
         </Link>
-        <div className="ml-auto flex items-center mx-2">
+        <div className="flex items-center gap-2">
           <a
+            target="_blank"
             href="https://multiversx.com/sovereign-chains"
-            className="text-teal hover:enabled:bg-neutral-750 font-family-medium max-w-[30rem] mr-2"
+            className="text-teal hover:enabled:bg-neutral-750 font-family-medium text-right leading-4"
           >
-            multiversx.com/sovereign-chains
+            sovereign chains
           </a>
           <FontAwesomeIcon icon={faArrowRight} className="h-4 w-4 text-teal" />
         </div>
