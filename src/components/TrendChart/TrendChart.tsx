@@ -15,7 +15,8 @@ export function TrendChart() {
   const { tps: chartData } = useGetHistoricalTps();
 
   return (
-    <div className="w-full h-24 relative flex flex-col items-center mt-32">
+    <div className="w-full h-32 relative flex flex-col items-center">
+      <div className="float-left mr-auto ml-10 text-neutral-400 text-sm">Last hour</div>
       <ResponsiveContainer>
         <ComposedChart data={chartData}>
           <defs>
