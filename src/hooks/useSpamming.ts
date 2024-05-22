@@ -15,6 +15,7 @@ import type { Transaction } from '@multiversx/sdk-core';
 export const useSpamming = () => {
   const { nonce } = useAppProvider();
   const [spamming, setSpamming] = useState(false);
+  const [transactionsSentCount, setTransactionSentCount] = useState(0);
   const infiniteSpamming = useRef(true);
   const latestNonceRef = useRef(nonce);
   const startSignatureNonceRef = useRef(nonce);
@@ -83,6 +84,7 @@ export const useSpamming = () => {
         // Add failed transactions to retry list
         failedTransactionsRef.current.push(...batch);
       } finally {
+        setTransactionSentCount((prev) => prev + batch.length);
         await delay(delayBetweenTransactions);
       }
     }
@@ -129,5 +131,6 @@ export const useSpamming = () => {
     spam,
     start,
     stop,
+    transactionsSentCount,
   };
 };

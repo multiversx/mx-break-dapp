@@ -46,7 +46,7 @@ export const GetFunds = () => {
           </div>
           <div className="text-gray-200">
             <span className="font-medium max-w-50 text-wrap break-all text-teal">
-              {formattedBalance} EGLD
+              {formattedBalance} xEGLD
             </span>
           </div>
         </div>
