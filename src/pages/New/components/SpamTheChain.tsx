@@ -26,7 +26,7 @@ export const SpamTheChain = () => {
       <div className="flex flex-col mt-5">
         <div className="flex gap-2">
           {
-            <div className={`flex flex-col mr-5`}>
+            <div className={`flex flex-col`}>
               {spamming && (
                 <div className="text-gray-400 mb-2 flex items-center">
                   <FontAwesomeIcon icon={faSpinner} className="fa-1x p-1" spin />
@@ -40,11 +40,16 @@ export const SpamTheChain = () => {
                 className={`mr-0 flex items-center text-sm p-4 rounded-2xl ${isDisabled ? 'bg-neutral-600 text-neutral-400' : 'bg-teal text-black '}`}
               >
                 {!spamming ? (
-                  <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
+                  <>
+                    <FontAwesomeIcon icon={faPlay} className="fa-1x p-1" />
+                    <span>Start Spamming</span>
+                  </>
                 ) : (
-                  <FontAwesomeIcon icon={faStop} className="fa-1x p-1" />
+                  <>
+                    <FontAwesomeIcon icon={faStop} className="fa-1x p-1" />
+                    <span>Stop Spamming</span>
+                  </>
                 )}
-                <span>Start Spamming</span>
               </button>
 
               {transactionsSentCount > 0 && (

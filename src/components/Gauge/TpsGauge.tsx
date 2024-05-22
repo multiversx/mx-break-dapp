@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useGauge } from 'use-gauge';
 import { motion, MotionConfig } from 'framer-motion';
 import { useGetLatestTps } from '../../hooks/useGetLatestTps.ts';
@@ -29,8 +29,75 @@ interface SpeedProps {
   value: number;
 }
 
+const arcGradient = (value: number) => {
+  if (value <= 1_000) {
+    return (
+      <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="100%" stopColor="#00a9fe" />
+      </linearGradient>
+    );
+  }
+  if (value > 1_000 && value <= 10_000) {
+    return (
+      <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#00a9fe" />
+      </linearGradient>
+    );
+  }
+  if (value > 10_000 && value <= 15_000) {
+    return (
+      <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#00a9fe" />
+        <stop offset="100%" stopColor="#2276a0" />
+      </linearGradient>
+    );
+  }
+  if (value > 10_000 && value <= 25_000) {
+    return (
+      <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#8ae4ad" />
+      </linearGradient>
+    );
+  }
+  if (value > 25_000 && value <= 49_000) {
+    return (
+      <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#00a9fe" />
+        <stop offset="25%" stopColor="#4fcf90" />
+        <stop offset="50%" stopColor="#4fcf90" />
+        <stop offset="70%" stopColor="#4fcf90" />
+        <stop offset="100%" stopColor="#2cce7e" />
+      </linearGradient>
+    );
+  }
+  if (value > 49_000) {
+    return (
+      <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#dc4265" />
+        <stop offset="25%" stopColor="#9b0527" />
+        <stop offset="50%" stopColor="#9b0527" />
+        <stop offset="75%" stopColor="#fa0303" />
+        <stop offset="100%" stopColor="#fa0303" />
+      </linearGradient>
+    );
+  }
+};
+
 function Speed(props: SpeedProps) {
   const { value } = props;
+
+  const guardedValue = useMemo(() => {
+    if (value < 0) {
+      return 0;
+    }
+
+    if (value > MAX_SPEED) {
+      return MAX_SPEED;
+    }
+
+    return value;
+  }, [value]);
+
   const gauge = useGauge({
     domain: [0, 60_000],
     startAngle: START_ANGLE,
@@ -40,45 +107,15 @@ function Speed(props: SpeedProps) {
   });
 
   const needle = gauge.getNeedleProps({
-    value,
+    value: guardedValue,
     baseRadius: 8,
     tipRadius: 2,
   });
 
-  const arcColor = (value: number) => {
-    if (value <= 10_000) {
-      return 'stroke-green-300';
-    }
-    if (value >= 10_000 && value <= 50_000) {
-      return 'stroke-yellow-300';
-    }
-    if (value >= 50_000) {
-      return 'stroke-red-400';
-    }
-  };
-
   return (
     <div className="relative">
-      <svg
-        className="w-full overflow-visible p-4 top-0 left-0"
-        {...gauge.getSVGProps()}
-        // width="100%"
-        // height="100%"
-        // style={{
-        //   left: '24.8%',
-        //   right: 0,
-        //   top: '-11.7%',
-        //   bottom: 0,
-        //   width: '50%',
-        // }}
-      >
-        <defs>
-          <linearGradient id="arc-value-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#05a" />
-            <stop offset="50%" stopColor="#a55" />
-            <stop offset="100%" stopColor="#0a5" />
-          </linearGradient>
-        </defs>
+      <svg className="w-full overflow-visible p-4 top-0 left-0" {...gauge.getSVGProps()}>
+        <defs>{arcGradient(value)}</defs>
 
         <g id="arcs">
           <path
@@ -109,12 +146,10 @@ function Speed(props: SpeedProps) {
             {...gauge.getArcProps({
               offset: 30,
               startAngle: START_ANGLE,
-              endAngle: gauge.valueToAngle(value),
+              endAngle: gauge.valueToAngle(guardedValue),
             })}
             fill="none"
-            // fill={`url(#arc-value-gradient)`}
-            // className="stroke-green-400"
-            className={arcColor(value)}
+            stroke={`url(#arc-value-gradient)`}
             strokeLinecap="round"
             strokeWidth={24}
           />
@@ -173,16 +208,18 @@ function Speed(props: SpeedProps) {
           />
         </g>
       </svg>
-      <div className="absolute" style={{ top: '80%', left: '35%' }}>
+      <div className="absolute" style={{ top: '80%', left: '38%' }}>
         {/*<CenterIcon />*/}
         <div className="flex justify-center flex-col mt-2">
           <div className="flex items-center gap-1">
             <span className="w-3 h-3 me-2 text-sm text-left font-semibold text-teal bg-teal rounded-full" />
             <span className="text-sm font-medium text-teal text-left">Live TPS</span>
           </div>
-          <div className="flex items-center mt-2">
+          <div className="flex justify-center items-center mt-2">
             <div className="text-3xl font-medium text-neutral-200">
-              {Math.round(value).toLocaleString()}
+              {value > 60_000
+                ? `${Math.round(value / 1000).toLocaleString()}K`
+                : Math.round(value).toLocaleString()}
             </div>
           </div>
         </div>
@@ -193,7 +230,7 @@ function Speed(props: SpeedProps) {
 
 export function TspGauge() {
   const value = useSpeedTest();
-  // const value = 20_000;
+  // const value = 70_111;
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
       <Speed value={value} />
