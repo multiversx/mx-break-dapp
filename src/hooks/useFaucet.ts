@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useAppProvider } from '../../../AppContext';
+import { useAppProvider } from '../AppContext.tsx';
 import { API_URL, extrasApi } from 'config';
-import { getAccessToken } from 'helpers/accessToken/getAccessToken';
+import { getAccessToken } from 'helpers/accessToken/getAccessToken.ts';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
 export const useFaucet = () => {

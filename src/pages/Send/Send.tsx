@@ -1,8 +1,8 @@
-import { useGenerateWallet } from './hooks/useGenerateWallet.ts';
+import { useGenerateWallet } from '../../hooks/useGenerateWallet.ts';
 import { useAppProvider } from '../../AppContext.tsx';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
-import { useFaucet } from './hooks/useFaucet';
+import { useFaucet } from '../../hooks/useFaucet.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
