@@ -17,9 +17,9 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path={AppRoutes.NEW} element={<New />} />
-          <Route path={AppRoutes.HOME} element={<Home />} />
-          <Route path={AppRoutes.SEND} element={<Send />} />
+          {/*<Route path={AppRoutes.NEW} element={<New />} />*/}
+          <Route path={AppRoutes.HOME} element={<New />} />
+          {/*<Route path={AppRoutes.SEND} element={<Send />} />*/}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

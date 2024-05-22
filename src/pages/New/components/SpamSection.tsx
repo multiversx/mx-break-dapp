@@ -7,7 +7,9 @@ export const SpamSection = () => {
   return (
     <SpammerCard>
       <GetWallet />
+      <hr className="border-neutral-700 my-4" />
       <GetFunds />
+      <hr className="border-neutral-700 my-4" />
       <SpamTheChain />
     </SpammerCard>
   );

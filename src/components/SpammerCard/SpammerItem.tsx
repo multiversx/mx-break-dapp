@@ -10,7 +10,7 @@ export const SpammerItem = ({
   children: ReactNode;
 }) => {
   return (
-    <div className="p-6 bg-white shadow dark:bg-neutral-900 dark:border-neutral-800">
+    <div className="p-1">
       <div className="flex flex-col gap-4 justify-between sm:flex-row">
         <div className="flex flex-col">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

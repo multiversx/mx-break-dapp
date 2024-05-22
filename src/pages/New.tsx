@@ -3,6 +3,7 @@ import { TspGauge } from '../components/Gauge/TpsGauge.tsx';
 import { TrendChart } from '../components/TrendChart/TrendChart.tsx';
 import { TotalTransactions } from './Home/components/TotalTransactions.tsx';
 import { MaxTps } from './Home/components/MaxTps.tsx';
+import { SpamSection } from './New/components/SpamSection.tsx';
 
 export const New = () => {
   return (
@@ -30,7 +31,9 @@ export const New = () => {
       </div>
 
       <div className="w-full p-4 flex justify-center">
-        <div className="p-4 rounded-2xl bg-neutral-800 min-h-[500px] w-full max-w-[50%]"></div>
+        <div className="p-4 rounded-2xl bg-neutral-800 min-h-[400px] w-full max-w-[80%]">
+          <SpamSection />
+        </div>
       </div>
     </Hero>
   );
