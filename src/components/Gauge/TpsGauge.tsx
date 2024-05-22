@@ -7,6 +7,8 @@ import { useGetLatestTps } from '../../pages/Home/hooks/useGetLatestTps.ts';
 const START_ANGLE = 70;
 const END_ANGLE = 290;
 const MAX_SPEED = 60_000;
+
+// Remove the normalization factor to get the actual TPS
 const NORMALIZATION_FACTOR_TO_BE_REMOVED = 10_000;
 
 const useSpeedTest = () => {
@@ -179,7 +181,9 @@ function Speed(props: SpeedProps) {
             <span className="text-sm font-medium text-teal text-left">Live TPS</span>
           </div>
           <div className="flex items-center mt-2">
-            <div className="text-3xl font-medium text-neutral-200">{value.toLocaleString()}</div>
+            <div className="text-3xl font-medium text-neutral-200">
+              {Math.round(value).toLocaleString()}
+            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ module.exports = {
       },
       colors: {
         // 'body-bg': '#171717',
-        'body-bg': '#020203',
+        'body-bg': '#080808',
         teal: '#00FFD1',
         // gray: {
         //     50: '#171717;',
