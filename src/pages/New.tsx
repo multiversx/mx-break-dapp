@@ -10,15 +10,15 @@ export const New = () => {
     <>
       <Hero>
         <SpamSection />
-        <div className="container-page gap-3 text-center">
-          <TspGauge />
-        </div>
+        {/*<div className="container-page gap-3 text-center">*/}
+        {/*  <TspGauge />*/}
+        {/*</div>*/}
 
-        <div className="w-full h-24 relative flex justify-end gap-4 px-2 mt-32">
-          <TrendChart />
-          <TotalTransactions />
-          <MaxTps />
-        </div>
+        {/*<div className="w-full h-24 relative flex justify-end gap-4 px-2 mt-32">*/}
+        {/*  <TrendChart />*/}
+        {/*  <TotalTransactions />*/}
+        {/*  <MaxTps />*/}
+        {/*</div>*/}
       </Hero>
     </>
   );
