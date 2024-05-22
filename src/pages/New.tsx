@@ -31,7 +31,7 @@ export const New = () => {
       </div>
 
       <div className="w-full p-4 flex justify-center">
-        <div className="p-4 rounded-2xl bg-neutral-800 min-h-[400px] w-full max-w-[80%]">
+        <div className="p-4 rounded-2xl bg-neutral-900 min-h-[400px] w-full w-full md:max-w-[80%]">
           <SpamSection />
         </div>
       </div>

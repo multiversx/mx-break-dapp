@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { Trim } from '@multiversx/sdk-dapp/UI';
 import { SpammerItem } from '../../../components/SpammerCard/SpammerItem.tsx';
 import { useAppProvider } from '../../../AppContext.tsx';
 import { useGenerateWallet } from '../../../hooks/useGenerateWallet.ts';
+import { explorerAddress } from 'config';
 
 export const GetWallet = () => {
   const { address } = useAppProvider();
@@ -44,9 +45,25 @@ export const GetWallet = () => {
                 Disconnect
               </button>
             </div>
-            <div className="text-gray-200 text-xs break-all rounded-3xl p-2 bg-gray-600">
-              <Trim text={address ?? ''} />
+            <div className="flex items-center py-2 text-gray-200 text-xs break-all rounded-3xl p-2 bg-neutral-800">
+              <div className="m-0 p-0">
+                <Trim text={address} />
+              </div>
+              <div className="ml-2 flex flex-nowrap min-w-32">
+                <a
+                  href={`${explorerAddress}/accounts/${address}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1 text-xs text-white bg-neutral-600 p-2 rounded-3xl"
+                >
+                  <span className="">View in Explorer</span>
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
+                </a>
+              </div>
             </div>
+            {/*<div className="text-gray-200 text-xs break-all rounded-3xl p-2 bg-gray-600">*/}
+            {/*  <Trim text={address ?? ''} />*/}
+            {/*</div>*/}
           </div>
         )}
       </div>
