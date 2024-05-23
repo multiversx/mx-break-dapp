@@ -4,7 +4,6 @@ import { AppRoutes } from './routes';
 import { Header } from './components/Header';
 import { Home } from 'pages/Home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -12,16 +11,17 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <div className="w-full h-screen overflow-auto bg-body-bg scrollbar-thin">
-        <BrowserRouter>
+      <BrowserRouter>
+        <div className="flex min-h-[100dvh] flex-col bg-black scrollbar-thin">
           <Header />
-          <Routes>
-            <Route path={AppRoutes.HOME} element={<Home />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+          <div className="flex min-h-[90dvh] flex-1 flex-col sm:min-h-fit">
+            <Routes>
+              <Route path={AppRoutes.HOME} element={<Home />} />
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }
