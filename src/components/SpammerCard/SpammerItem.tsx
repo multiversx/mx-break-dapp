@@ -12,7 +12,7 @@ export const SpammerItem = ({
   return (
     <div className="p-4">
       <div className="flex flex-col gap-4 justify-between sm:flex-row">
-        <div className="flex flex-col justify-between gap-2">
+        <div className="flex flex-col gap-4">
           <h5 className="text-2xl font-roobert-medium tracking-tight text-neutral-200">{title}</h5>
           <p className="font-normal text-neutral-500">{subtitle}</p>
         </div>
