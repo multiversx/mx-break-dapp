@@ -6,7 +6,7 @@ import { useSpamming } from '../../../hooks/useSpamming';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
 export const SpamTheChain = () => {
-  const { address, balance, nonce } = useAppProvider();
+  const { address, balance } = useAppProvider();
   const { start, stop, spamming, transactionsSentCount } = useSpamming();
 
   const formattedBalance = formatAmount({
