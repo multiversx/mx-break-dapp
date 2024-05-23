@@ -14,7 +14,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="w-full h-screen overflow-auto bg-body-bg bg-[url('/src/assets/hero.png')] bg-top bg-no-repeat md:bg-[url('/src/assets/hero.png')] bg-cover scrollbar-thin">
+      <div className="w-full h-screen overflow-auto bg-body-bg scrollbar-thin">
         <BrowserRouter>
           <Header />
           <Routes>

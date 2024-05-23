@@ -8,9 +8,8 @@ import { SpamSection } from './components/SpamSection';
 export const Home = () => {
   return (
     <Hero>
-      <div className="font-roobert-medium hero-gradient text-transparent bg-clip-text text-center text-4xl md:leading-tight md:text-6xl tracking-tight mt-12 md:mt-4">
-        Move fast and break chains
-        <span className="hidden sm:block" />
+      <div className="font-roobert-medium hero-gradient text-transparent bg-clip-text text-center text-3xl md:leading-tight md:text-6xl tracking-tight mt-12 md:mt-4">
+        Move fast and break chains <span className="hidden sm:block" />
         with Sovereign Speed
       </div>
 
@@ -26,7 +25,7 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="text-white text-center text-4xl md:text-6xl font-roobert-medium mt-20 md:mt-10">
+      <div className="text-white text-center text-4xl md:text-6xl font-roobert-medium mt-10">
         Will it break? Can you break it?
       </div>
 
