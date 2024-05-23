@@ -13,7 +13,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="w-full h-screen overflow-auto bg-body-bg scrollbar-thin">
+      <div className="w-full h-screen overflow-auto bg-black scrollbar-thin">
         <BrowserRouter>
           <Header />
           <Routes>

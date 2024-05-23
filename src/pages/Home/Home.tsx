@@ -16,13 +16,6 @@ export const Home = () => {
       <div className="flex gap-3 text-center p-6 md:p-6 relative">
         <div className="relative">
           <TspGauge />
-
-          <div className="absolute left-0 top-7 z-[1] w-auto min-w-full min-h-full max-w-full rounded-tl-full rounded-tr-full overflow-hidden">
-            <video loop muted autoPlay className="mt-8 sm:mt-0">
-              <source src="https://cdn.multiversx.com/bg.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
         </div>
       </div>
 
@@ -38,7 +31,7 @@ export const Home = () => {
         Will it break? Can you break it?
       </div>
 
-      <div className="w-full p-4 flex justify-center">
+      <div className="w-full p-4 flex justify-center relative flex-col items-center ">
         <div className="p-4 rounded-2xl bg-neutral-900 w-full md:max-w-[80%]">
           <SpamSection />
         </div>
