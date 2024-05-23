@@ -5,7 +5,7 @@ import { Tick } from 'types/tick';
 
 export const useGetHistoricalTpsQuery = () => {
   const pollInterval = 1000;
-  const url = `${API_URL}/tps/history/10m`;
+  const url = `${API_URL}/tps/history`;
 
   const queryFn = async <TData>() => {
     const { data } = await axios.get<TData>(url, {

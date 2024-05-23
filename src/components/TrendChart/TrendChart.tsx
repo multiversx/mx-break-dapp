@@ -17,7 +17,7 @@ export function TrendChart() {
   return (
     <div className="flex-1 h-32 relative flex flex-col items-center">
       <div className="absolute h-full w-32 md:w-60 left-0 chart-gradient z-10" />
-      <div className="float-left mr-auto ml-10 text-neutral-400 text-sm z-20">Last 10 minutes</div>
+      <div className="float-left mr-auto ml-10 text-neutral-400 text-sm z-20">Last hour</div>
       <ResponsiveContainer>
         <ComposedChart data={chartData}>
           <defs>

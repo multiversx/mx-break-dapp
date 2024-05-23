@@ -5,7 +5,7 @@ import { Tick } from 'types/tick';
 
 export const useGetLatestTpsQuery = () => {
   const pollInterval = 5000;
-  const url = `${API_URL}/tps/latest/5s`;
+  const url = `${API_URL}/tps/latest`;
 
   const queryFn = async <TData>() => {
     const { data } = await axios.get<TData>(url, {
