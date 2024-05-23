@@ -13,8 +13,17 @@ export const Home = () => {
         with Sovereign Speed
       </div>
 
-      <div className="gap-3 text-center p-6 md:p-6">
-        <TspGauge />
+      <div className="flex gap-3 text-center p-6 md:p-6 relative">
+        <div className="relative">
+          <TspGauge />
+
+          <div className="absolute left-0 top-7 z-[1] w-auto min-w-full min-h-full max-w-full rounded-tl-full rounded-tr-full overflow-hidden">
+            <video loop muted autoPlay className="mt-8 sm:mt-0">
+              <source src="/src/assets/bg.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
       </div>
 
       <div className="w-full relative md:flex md:flex-row md:justify-end md:gap-4 mt-0 md:mt-32">
