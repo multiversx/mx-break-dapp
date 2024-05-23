@@ -1,3 +1,5 @@
+import { AnimateNumber } from 'components/AnimateNumber/AnimateNumber';
+
 export const TspOnDesktopView = ({ value }: { value: number }) => {
   return (
     <div className="absolute" style={{ top: '80%', left: '38%' }}>
@@ -8,7 +10,7 @@ export const TspOnDesktopView = ({ value }: { value: number }) => {
         </div>
         <div className="flex justify-center items-center mt-2">
           <div className="text-3xl font-medium text-neutral-200">
-            {Math.round(value).toLocaleString()}
+            <AnimateNumber amount={Math.round(value)} />
           </div>
         </div>
       </div>

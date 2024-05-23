@@ -1,6 +1,7 @@
 import { Stat } from 'components/Stat/Stat';
 import { useEffect, useRef } from 'react';
 import { useGetMaxTps } from 'hooks/useGetMaxTps';
+import { AnimateNumber } from 'components/AnimateNumber/AnimateNumber';
 
 export const MaxTps = () => {
   const mountedRef = useRef(false);
@@ -28,7 +29,9 @@ export const MaxTps = () => {
 
   return (
     <Stat title="Max TPS Achieved">
-      <div className="text-red-500">{Math.round(maxTps).toLocaleString()}</div>
+      <div className="text-red-500">
+        <AnimateNumber amount={Math.round(maxTps)} />
+      </div>
     </Stat>
   );
 };
