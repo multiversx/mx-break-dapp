@@ -71,7 +71,7 @@ const arcGradient = (value: number) => {
 };
 
 function Gauge(props: SpeedProps) {
-  const { guardedValue, maxValueAchieved = 0, guardedMaxValueAchieved = 0 } = props;
+  const { value, guardedValue, maxValueAchieved = 0, guardedMaxValueAchieved = 0 } = props;
   const isMobileDevice = getIsMobileDeviceScreen();
 
   // Compute the angle using linear interpolation within the range
@@ -234,9 +234,9 @@ function Gauge(props: SpeedProps) {
         </g>
       </svg>
       {isMobileDevice ? (
-        <TspOnMobileView value={guardedValue} maxValueAchieved={maxValueAchieved} />
+        <TspOnMobileView value={value} maxValueAchieved={maxValueAchieved} />
       ) : (
-        <TspOnDesktopView value={guardedValue} />
+        <TspOnDesktopView value={value} />
       )}
     </div>
   );
