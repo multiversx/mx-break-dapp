@@ -1,7 +1,6 @@
 export const TspOnDesktopView = ({ value }: { value: number }) => {
   return (
     <div className="absolute" style={{ top: '80%', left: '38%' }}>
-      {/*<CenterIcon />*/}
       <div className="flex justify-center flex-col mt-2">
         <div className="flex items-center gap-1">
           <span className="w-3 h-3 me-2 text-sm text-left font-semibold text-teal bg-teal rounded-full" />
