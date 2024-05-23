@@ -1,33 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useGauge } from 'use-gauge';
 import { motion, MotionConfig } from 'framer-motion';
-import { useGetLatestTps } from '../../hooks/useGetLatestTps.ts';
-import { getIsMobileDeviceScreen } from '../../helpers/getIsMobileDevideScreen.ts';
-import { TspOnMobileView } from './components/TspOnMobileView.tsx';
-import { TspOnDesktopView } from './components/TspOnDesktopView.tsx';
-import { useGetMaxTps } from '../../hooks/useGetMaxTps.ts';
-// import CenterIcon from '../../assets/06.svg?react';
+import { getIsMobileDeviceScreen } from '../../helpers/getIsMobileDevideScreen';
+import { TspOnMobileView } from './components/TspOnMobileView';
+import { TspOnDesktopView } from './components/TspOnDesktopView';
+import { GAUGE_MAX_VALUE, useGaugeData } from './hooks/useGaugeData.ts';
 
 const START_ANGLE = 70;
 const END_ANGLE = 290;
-const MAX_SPEED = 60_000;
-
-// Remove the normalization factor to get the actual TPS
-const NORMALIZATION_FACTOR_TO_BE_REMOVED = 1; // 10_000;
-
-const useSpeedTest = () => {
-  const { tps } = useGetLatestTps();
-
-  if (tps <= 0) {
-    return 0;
-  }
-
-  if (tps >= MAX_SPEED) {
-    return MAX_SPEED;
-  }
-
-  return tps * NORMALIZATION_FACTOR_TO_BE_REMOVED;
-};
 
 interface SpeedProps {
   value: number;
@@ -88,38 +68,14 @@ const arcGradient = (value: number) => {
   }
 };
 
-function Speed(props: SpeedProps) {
+function Gauge(props: SpeedProps) {
   const { value, maxValueAchieved = 0 } = props;
   const isMobileDevice = getIsMobileDeviceScreen();
-
-  const guardedValue = useMemo(() => {
-    if (value < 0) {
-      return 0;
-    }
-
-    if (value > MAX_SPEED) {
-      return MAX_SPEED;
-    }
-
-    return value;
-  }, [value]);
-
-  const guardedMaxValueAchieved = useMemo(() => {
-    if (maxValueAchieved <= 0) {
-      return 1;
-    }
-
-    if (maxValueAchieved > MAX_SPEED) {
-      return MAX_SPEED;
-    }
-
-    return maxValueAchieved;
-  }, [maxValueAchieved]);
 
   // Compute the angle using linear interpolation within the range
   const calcAngle = (val: number) => {
     // Compute the proportion of the value within the range
-    const proportion = val / MAX_SPEED;
+    const proportion = val / GAUGE_MAX_VALUE;
 
     // Compute the corresponding angle within the angle range
     const angle = START_ANGLE + proportion * (END_ANGLE - START_ANGLE);
@@ -143,12 +99,12 @@ function Speed(props: SpeedProps) {
     diameter: 390,
   });
   const gaugeMaxTpsTickProps = gaugeMaxTps.getTickProps({
-    angle: calcAngle(guardedMaxValueAchieved),
+    angle: calcAngle(maxValueAchieved),
     length: 50,
   });
 
   const needle = gauge.getNeedleProps({
-    value: guardedValue,
+    value: value,
     baseRadius: 8,
     tipRadius: 2,
   });
@@ -187,7 +143,7 @@ function Speed(props: SpeedProps) {
             {...gauge.getArcProps({
               offset: 30,
               startAngle: START_ANGLE,
-              endAngle: gauge.valueToAngle(guardedValue),
+              endAngle: gauge.valueToAngle(value),
             })}
             fill="none"
             stroke={`url(#arc-value-gradient)`}
@@ -236,11 +192,11 @@ function Speed(props: SpeedProps) {
           {!isMobileDevice && (
             <text
               className="fill-red-400 font-medium"
-              {...gauge.getLabelProps({ angle: calcAngle(guardedMaxValueAchieved), offset: -100 })}
+              {...gauge.getLabelProps({ angle: calcAngle(maxValueAchieved), offset: -100 })}
             >
-              {guardedMaxValueAchieved >= 1000
-                ? `${guardedMaxValueAchieved.toLocaleString()} MAX TPS`
-                : `${guardedMaxValueAchieved} MAX TPS`}
+              {maxValueAchieved >= 1000
+                ? `${maxValueAchieved.toLocaleString()} MAX TPS`
+                : `${maxValueAchieved} MAX TPS`}
             </text>
           )}
         </g>
@@ -268,7 +224,7 @@ function Speed(props: SpeedProps) {
         </g>
       </svg>
       {isMobileDevice ? (
-        <TspOnMobileView value={value} maxValueAchieved={guardedMaxValueAchieved} />
+        <TspOnMobileView value={value} maxValueAchieved={maxValueAchieved} />
       ) : (
         <TspOnDesktopView value={value} />
       )}
@@ -277,14 +233,13 @@ function Speed(props: SpeedProps) {
 }
 
 export function TspGauge() {
-  const value = useSpeedTest();
-  const { maxTps } = useGetMaxTps();
+  const { tps, maxTps } = useGaugeData();
   const maxValueAchieved = Math.round(maxTps);
-  // const value = 30_111;
+  // const tps = 30_111;
   // const maxValueAchieved = 1800;
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
-      <Speed value={value} maxValueAchieved={maxValueAchieved} />
+      <Gauge value={tps} maxValueAchieved={maxValueAchieved} />
     </MotionConfig>
   );
 }
