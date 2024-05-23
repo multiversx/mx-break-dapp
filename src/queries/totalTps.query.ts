@@ -24,5 +24,6 @@ export const useGetTotalTpsQuery = () => {
     refetchInterval: pollInterval,
     refetchIntervalInBackground: true,
     refetchOnWindowFocus: false,
+    gcTime: 0,
   });
 };

@@ -30,6 +30,7 @@ export const useGetAccountQuery = () => {
     refetchInterval: pollInterval,
     refetchIntervalInBackground: true,
     refetchOnWindowFocus: false,
+    gcTime: 0,
   });
 
   useEffect(() => {

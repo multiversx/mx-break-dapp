@@ -25,5 +25,6 @@ export const useGetMaxTpsQuery = () => {
     refetchInterval: pollInterval,
     refetchIntervalInBackground: true,
     refetchOnWindowFocus: false,
+    gcTime: 0,
   });
 };
