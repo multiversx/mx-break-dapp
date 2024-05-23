@@ -39,6 +39,7 @@
   }
 
   html, body, #root {
+    @apply bg-body-bg;
     font-family: "Roobert Regular", ui-sans-serif, system-ui, sans-serif;
 
     @supports (scrollbar-width: auto) {
@@ -107,5 +108,9 @@
   .font-roobert-semibold {
     font-family: 'Roobert SemiBold', 'Inter', Roboto, sans-serif;
     font-weight: 600;
+  }
+
+  .chart-gradient { 
+    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(0,0,0,1));
   }
 }
