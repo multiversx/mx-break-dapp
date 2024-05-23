@@ -13,7 +13,7 @@ export const MaxTps = () => {
   if (error) {
     return (
       <Stat title="Max TPS Achieved">
-        <div className="text-neutral-300">Error</div>
+        <div className="text-neutral-300"></div>
       </Stat>
     );
   }

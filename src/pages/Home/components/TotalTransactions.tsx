@@ -4,19 +4,11 @@ import { useEffect, useRef } from 'react';
 
 export const TotalTransactions = () => {
   const mountedRef = useRef(false);
-  const { totalTransactions, pending, error } = useGetTotalTransactions();
+  const { totalTransactions, pending } = useGetTotalTransactions();
 
   useEffect(() => {
     mountedRef.current = true;
   }, []);
-
-  if (error) {
-    return (
-      <Stat title="Total Transactions">
-        <div className="text-neutral-300">Error</div>
-      </Stat>
-    );
-  }
 
   if (pending && !mountedRef.current) {
     return (
