@@ -20,7 +20,7 @@ export const Header = () => {
             href="https://multiversx.com/sovereign-chains"
             className="text-teal hover:enabled:bg-neutral-750 font-family-medium text-right leading-4"
           >
-            sovereign chains
+            Sovereign Chains
           </a>
           <FontAwesomeIcon icon={faArrowRight} className="h-4 w-4 text-teal" />
         </div>
