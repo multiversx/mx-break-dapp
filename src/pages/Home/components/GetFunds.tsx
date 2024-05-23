@@ -39,15 +39,11 @@ export const GetFunds = () => {
       title={'Get Funds'}
       subtitle={'Use the Faucet to get funds to pay for the spam transaction costs'}
     >
-      <div className="flex items-center justify-between mt-5 text-gray-200">
-        <div className={`flex flex-col mr-5 ${showBalance ? 'hidden' : ''}`}>
-          <div className="text-gray-400 mb-2">
-            <span className="font-medium">Balance</span>
-          </div>
-          <div className="text-gray-200">
-            <span className="font-medium max-w-50 text-wrap break-all text-teal">
-              {formattedBalance} Space Credit
-            </span>
+      <div className="flex items-center justify-between font-roobert-semibold">
+        <div className={`flex flex-col md:text-right ${showBalance ? 'hidden' : ''}`}>
+          <div className="text-neutral-200 text-sm mb-2">Balance</div>
+          <div className="font-roobert-medium max-w-50 text-wrap break-all text-teal">
+            {formattedBalance} Space Credits
           </div>
         </div>
 
@@ -61,18 +57,18 @@ export const GetFunds = () => {
             <button
               disabled={requestDisabled || claiming}
               onClick={() => claimTokens(captcha)}
-              className={`mr-0 flex items-center text-sm p-4 rounded-2xl ${!address ? 'bg-neutral-600 text-neutral-400' : 'bg-teal text-black '}`}
+              className={`mr-0 flex items-center px-4 py-2 rounded-xl ${!address ? 'bg-neutral-700 text-neutral-400' : 'bg-teal text-black '}`}
             >
               {claiming && <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2" />}
               <span>
                 {' '}
                 <FontAwesomeIcon icon={faWallet} className="mr-2" />
-                Get funds from Faucet
+                Get Space Credits
               </span>
             </button>
           </div>
         ) : (
-          claiming && <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2" spin />
+          claiming && <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2 text-white" spin />
         )}
       </div>
     </SpammerItem>

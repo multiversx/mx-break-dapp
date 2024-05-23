@@ -22,11 +22,11 @@ export const GetWallet = () => {
       title={'Get Wallet'}
       subtitle={'Generate a fresh wallet to send transactions and spam the Sovereign Chain'}
     >
-      <div className="flex items-center justify-between mt-5 text-gray-200">
+      <div className="flex items-center justify-between font-roobert-semibold">
         {!address && (
           <button
             onClick={generateWallet}
-            className="mr-0 flex items-center bg-teal text-black text-sm p-4 rounded-2xl"
+            className="mr-0 flex items-center bg-teal text-black px-4 py-2 rounded-xl"
           >
             {pending && <FontAwesomeIcon icon={faSpinner} className="mr-2" spin />}
             <FontAwesomeIcon icon={faWallet} className="mr-2" />
@@ -35,22 +35,22 @@ export const GetWallet = () => {
         )}
 
         {address && (
-          <div className={`flex flex-col mr-5 ${address ? '' : 'hidden'}`}>
-            <div className="flex gap-4 text-gray-400 mb-2 text-sm">
-              <span className="font-medium">Wallet generated</span>
+          <div className={`flex flex-col ${address ? '' : 'hidden'}`}>
+            <div className="flex gap-4 text-neutral-200 mb-2 text-sm">
+              <span>Wallet generated</span>
               <div className="flex items-center gap-1">
-                <span className="w-1 h-1 m-0 text-sm text-left font-semibold text-teal bg-teal rounded-full" />
-                <span className="text-sm font-medium text-teal text-left">Connected</span>
+                <span className="w-1 h-1 m-0 text-sm text-left text-teal bg-teal rounded-full" />
+                <span className="text-sm text-teal text-left">Connected</span>
               </div>
-              <button className="ml-auto mr-0" onClick={onDisconnect}>
+              <button className="ml-auto mr-0 text-neutral-500" onClick={onDisconnect}>
                 Disconnect
               </button>
             </div>
-            <div className="flex items-center py-2 text-gray-200 text-xs break-all rounded-3xl p-2 bg-neutral-800">
-              <div className="m-0 ml-2 p-0">
-                <Trim text={address} />
+            <div className="flex flex-row gap-3 items-center p-1 text-gray-200 text-xs rounded-3xl bg-neutral-800">
+              <div className="ml-1 w-full overflow-hidden text-neutral-300 max-w-40">
+                <Trim text={address ?? '...'} />
               </div>
-              <div className="ml-2 flex flex-nowrap min-w-32">
+              <div className="flex flex-nowrap flex-shrink-0">
                 <a
                   href={`${explorerAddress}/accounts/${address}`}
                   target="_blank"
@@ -62,9 +62,6 @@ export const GetWallet = () => {
                 </a>
               </div>
             </div>
-            {/*<div className="text-gray-200 text-xs break-all rounded-3xl p-2 bg-gray-600">*/}
-            {/*  <Trim text={address ?? ''} />*/}
-            {/*</div>*/}
           </div>
         )}
       </div>
