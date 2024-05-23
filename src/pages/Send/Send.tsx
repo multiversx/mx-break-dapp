@@ -1,13 +1,13 @@
-import { useGenerateWallet } from '../../hooks/useGenerateWallet.ts';
-import { useAppProvider } from '../../AppContext.tsx';
+import { useGenerateWallet } from '../../hooks/useGenerateWallet';
+import { useAppProvider } from '../../AppContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
-import { useFaucet } from '../../hooks/useFaucet.ts';
+import { useFaucet } from '../../hooks/useFaucet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 import { useSpamming } from 'hooks/useSpamming';
-import { CheckmarkSVGIcon } from '../../components/CheckmarSVGIcon.tsx';
+import { CheckmarkSVGIcon } from '../../components/CheckmarSVGIcon';
 
 const sitekey = '6LeOnY0fAAAAABCn_KfmqldzSsOEOP1JHvdfyYGd';
 

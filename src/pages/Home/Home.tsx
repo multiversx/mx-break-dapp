@@ -1,6 +1,6 @@
-import { TrendChart } from '../../components/TrendChart/TrendChart.tsx';
-import { useGetLatestTps } from '../../hooks/useGetLatestTps.ts';
-import { Speedometer } from '../../components/Speedometer/Speedometer.tsx';
+import { TrendChart } from '../../components/TrendChart/TrendChart';
+import { useGetLatestTps } from '../../hooks/useGetLatestTps';
+import { Speedometer } from '../../components/Speedometer/Speedometer';
 
 export const Home = () => {
   const { tps } = useGetLatestTps();

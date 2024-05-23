@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faSpinner, faStop } from '@fortawesome/free-solid-svg-icons';
-import { SpammerItem } from '../../../components/SpammerCard/SpammerItem.tsx';
-import { useAppProvider } from '../../../AppContext.tsx';
-import { useSpamming } from '../../../hooks/useSpamming.ts';
+import { SpammerItem } from '../../../components/SpammerCard/SpammerItem';
+import { useAppProvider } from '../../../AppContext';
+import { useSpamming } from '../../../hooks/useSpamming';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
 export const SpamTheChain = () => {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useAppProvider } from '../AppContext.tsx';
+import { useAppProvider } from '../AppContext';
 import { API_URL } from 'config';
 
 export const useGetHistoricalTps = () => {

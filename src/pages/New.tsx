@@ -1,9 +1,9 @@
 import { Hero } from '../components/Hero';
-import { TspGauge } from '../components/Gauge/TpsGauge.tsx';
-import { TrendChart } from '../components/TrendChart/TrendChart.tsx';
-import { TotalTransactions } from './Home/components/TotalTransactions.tsx';
-import { MaxTps } from './Home/components/MaxTps.tsx';
-import { SpamSection } from './New/components/SpamSection.tsx';
+import { TspGauge } from '../components/Gauge/TpsGauge';
+import { TrendChart } from '../components/TrendChart/TrendChart';
+import { TotalTransactions } from './Home/components/TotalTransactions';
+import { MaxTps } from './Home/components/MaxTps';
+import { SpamSection } from './New/components/SpamSection';
 
 export const New = () => {
   return (

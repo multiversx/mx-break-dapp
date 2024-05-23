@@ -3,13 +3,13 @@ import { useAppProvider } from '../AppContext';
 import { delay } from 'helpers/delay';
 import { sendSignedTransactions } from 'helpers/transactions/sendSignedTransactions';
 import { delayBetweenTransactions, transactionsBatchSize } from 'config';
-import { useGenerateSignedTransaction } from './useGenerateSignedTransaction.ts';
+import { useGenerateSignedTransaction } from './useGenerateSignedTransaction';
 import {
   clearSignatureCache,
   removeSignaturesBeforeNonce,
   setSignature,
   getSignatureCache,
-} from '../cache/signatureCache.ts';
+} from '../cache/signatureCache';
 import type { Transaction } from '@multiversx/sdk-core';
 
 export const useSpamming = () => {

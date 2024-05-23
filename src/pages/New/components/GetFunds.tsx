@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faWallet } from '@fortawesome/free-solid-svg-icons';
-import { SpammerItem } from '../../../components/SpammerCard/SpammerItem.tsx';
-import { useAppProvider } from '../../../AppContext.tsx';
+import { SpammerItem } from '../../../components/SpammerCard/SpammerItem';
+import { useAppProvider } from '../../../AppContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useState } from 'react';
-import { useFaucet } from '../../../hooks/useFaucet.ts';
+import { useFaucet } from '../../../hooks/useFaucet';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
 const sitekey = '6LeOnY0fAAAAABCn_KfmqldzSsOEOP1JHvdfyYGd';

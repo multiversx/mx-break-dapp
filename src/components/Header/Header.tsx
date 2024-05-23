@@ -1,4 +1,4 @@
-import { Logo } from '../Logo.tsx';
+import { Logo } from '../Logo';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

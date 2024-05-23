@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { Trim } from '@multiversx/sdk-dapp/UI';
-import { SpammerItem } from '../../../components/SpammerCard/SpammerItem.tsx';
-import { useAppProvider } from '../../../AppContext.tsx';
-import { useGenerateWallet } from '../../../hooks/useGenerateWallet.ts';
+import { SpammerItem } from '../../../components/SpammerCard/SpammerItem';
+import { useAppProvider } from '../../../AppContext';
+import { useGenerateWallet } from '../../../hooks/useGenerateWallet';
 import { explorerAddress } from 'config';
 
 export const GetWallet = () => {

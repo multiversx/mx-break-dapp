@@ -1,5 +1,5 @@
-import { decrypt } from './crypto.ts';
-import { ENCRIPTION_KEY } from '../const/encription-key.ts';
+import { decrypt } from './crypto';
+import { ENCRIPTION_KEY } from '../const/encription-key';
 import { UserSecretKey, UserSigner } from '@multiversx/sdk-wallet';
 import { Mnemonic } from '@multiversx/sdk-wallet/out';
 

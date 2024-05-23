@@ -6,7 +6,7 @@ import {
   useEffect,
   useReducer,
 } from 'react';
-import { SESSION_KEY } from './const/session.ts';
+import { SESSION_KEY } from './const/session';
 
 export type AppStateType = {
   address?: string;

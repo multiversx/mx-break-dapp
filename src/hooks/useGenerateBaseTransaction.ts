@@ -1,4 +1,4 @@
-import { useAppProvider } from '../AppContext.tsx';
+import { useAppProvider } from '../AppContext';
 import { useCallback } from 'react';
 import { CHAIN_ID } from 'config';
 import { Transaction } from '@multiversx/sdk-core/out';

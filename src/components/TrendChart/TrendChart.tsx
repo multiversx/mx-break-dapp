@@ -8,7 +8,7 @@ import {
   XAxis,
   Area,
 } from 'recharts';
-import { useGetHistoricalTps } from 'hooks/useGetHistoricalTps.ts';
+import { useGetHistoricalTps } from 'hooks/useGetHistoricalTps';
 import moment from 'moment';
 
 export function TrendChart() {

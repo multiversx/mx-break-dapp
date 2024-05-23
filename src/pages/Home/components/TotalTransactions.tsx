@@ -1,5 +1,5 @@
-import { Stat } from '../../../components/Stat/Stat.tsx';
-import { useGetTotalTransactions } from '../../../hooks/useGetTotalTransactions.ts';
+import { Stat } from '../../../components/Stat/Stat';
+import { useGetTotalTransactions } from '../../../hooks/useGetTotalTransactions';
 import { useEffect, useRef } from 'react';
 
 export const TotalTransactions = () => {

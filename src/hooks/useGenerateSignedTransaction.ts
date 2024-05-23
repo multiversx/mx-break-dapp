@@ -1,8 +1,8 @@
-import { useAppProvider } from '../AppContext.tsx';
+import { useAppProvider } from '../AppContext';
 import { useCallback } from 'react';
 import { CHAIN_ID } from 'config';
 import { Transaction } from '@multiversx/sdk-core/out';
-import { useSigner } from './useSigner.ts';
+import { useSigner } from './useSigner';
 
 export const useGenerateSignedTransaction = () => {
   const { address } = useAppProvider();

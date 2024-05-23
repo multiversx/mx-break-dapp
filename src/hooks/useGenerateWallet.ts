@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { generate } from 'helpers/generate.ts';
-import { encrypt } from 'helpers/crypto.ts';
-import { getAccessToken } from 'helpers/accessToken/getAccessToken.ts';
-import { ENCRIPTION_KEY } from 'const/encription-key.ts';
-import { useAppProvider } from '../AppContext.tsx';
+import { generate } from 'helpers/generate';
+import { encrypt } from 'helpers/crypto';
+import { getAccessToken } from 'helpers/accessToken/getAccessToken';
+import { ENCRIPTION_KEY } from 'const/encription-key';
+import { useAppProvider } from '../AppContext';
 
 export const useGenerateWallet = () => {
   const { dispatch, actions } = useAppProvider();

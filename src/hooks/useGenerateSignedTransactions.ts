@@ -1,7 +1,7 @@
-import { useAppProvider } from '../AppContext.tsx';
+import { useAppProvider } from '../AppContext';
 import { useCallback } from 'react';
 import { Transaction } from '@multiversx/sdk-core/out';
-import { useGenerateBaseTransaction } from './useGenerateBaseTransaction.ts';
+import { useGenerateBaseTransaction } from './useGenerateBaseTransaction';
 import { useSigner } from './useSigner';
 import { transactionsBatchSize } from 'config';
 

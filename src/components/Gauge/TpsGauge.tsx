@@ -4,7 +4,7 @@ import { motion, MotionConfig } from 'framer-motion';
 import { getIsMobileDeviceScreen } from '../../helpers/getIsMobileDevideScreen';
 import { TspOnMobileView } from './components/TspOnMobileView';
 import { TspOnDesktopView } from './components/TspOnDesktopView';
-import { GAUGE_MAX_VALUE, useGaugeData } from './hooks/useGaugeData.ts';
+import { GAUGE_MAX_VALUE, useGaugeData } from './hooks/useGaugeData';
 
 const START_ANGLE = 70;
 const END_ANGLE = 290;
