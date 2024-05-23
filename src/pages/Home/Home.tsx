@@ -8,7 +8,7 @@ import { SpamSection } from './components/SpamSection';
 export const Home = () => {
   return (
     <Hero>
-      <div className="font-roobert-medium hero-gradient text-transparent bg-clip-text text-center text-4xl md:text-6xl tracking-tight mt-12 md:mt-4">
+      <div className="font-roobert-medium hero-gradient text-transparent bg-clip-text text-center text-4xl md:leading-tight md:text-6xl tracking-tight mt-12 md:mt-4">
         Move fast and break chains
         <span className="hidden sm:block" />
         with Sovereign Speed
