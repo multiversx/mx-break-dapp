@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Tick } from 'types/tick';
 
 export const useGetMaxTpsQuery = () => {
-  const pollInterval = 2000;
+  const pollInterval = 5000;
   const url = `${API_URL}/tps/max`;
 
   const queryFn = async <TData>() => {

@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Tick } from 'types/tick';
 
 export const useGetLatestTpsQuery = () => {
-  const pollInterval = 1000;
-  const url = `${API_URL}/tps/latest/30s`;
+  const pollInterval = 5000;
+  const url = `${API_URL}/tps/latest/5s`;
 
   const queryFn = async <TData>() => {
     const { data } = await axios.get<TData>(url, {

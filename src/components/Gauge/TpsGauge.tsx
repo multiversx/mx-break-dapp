@@ -107,6 +107,7 @@ function Gauge(props: SpeedProps) {
     value: value,
     baseRadius: 8,
     tipRadius: 2,
+    offset: -15,
   });
 
   return (
@@ -200,7 +201,7 @@ function Gauge(props: SpeedProps) {
         </g>
         <g id="needle">
           <motion.line
-            className="stroke-neutral-700"
+            className="stroke-neutral-200"
             strokeLinecap="round"
             strokeWidth={4}
             animate={{
@@ -211,13 +212,22 @@ function Gauge(props: SpeedProps) {
             }}
           />
 
+          {/*<motion.circle*/}
+          {/*  className="fill-gray-400 opacity-25"*/}
+          {/*  animate={{*/}
+          {/*    cx: needle.base.cx,*/}
+          {/*    cy: needle.base.cy,*/}
+          {/*  }}*/}
+          {/*  r={20}*/}
+          {/*/>*/}
+
           <motion.circle
             className="fill-gray-200"
             animate={{
               cx: needle.base.cx,
               cy: needle.base.cy,
             }}
-            r={20}
+            r={6}
           />
         </g>
       </svg>
@@ -233,7 +243,7 @@ function Gauge(props: SpeedProps) {
 export function TspGauge() {
   const { tps, maxTps } = useGaugeData();
   const maxValueAchieved = Math.round(maxTps);
-  // const tps = 30_111;
+  // const tps = 30000;
   // const maxValueAchieved = 1800;
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
