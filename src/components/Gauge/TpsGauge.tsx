@@ -12,6 +12,7 @@ const END_ANGLE = 290;
 interface SpeedProps {
   value: number;
   maxValueAchieved?: number;
+  guardedMaxValueAchieved?: number;
 }
 
 const arcGradient = (value: number) => {
@@ -69,7 +70,7 @@ const arcGradient = (value: number) => {
 };
 
 function Gauge(props: SpeedProps) {
-  const { value, maxValueAchieved = 0 } = props;
+  const { value, maxValueAchieved = 0, guardedMaxValueAchieved = 0 } = props;
   const isMobileDevice = getIsMobileDeviceScreen();
 
   // Compute the angle using linear interpolation within the range
@@ -99,7 +100,7 @@ function Gauge(props: SpeedProps) {
     diameter: 390,
   });
   const gaugeMaxTpsTickProps = gaugeMaxTps.getTickProps({
-    angle: calcAngle(maxValueAchieved),
+    angle: calcAngle(guardedMaxValueAchieved),
     length: 50,
   });
 
@@ -193,7 +194,7 @@ function Gauge(props: SpeedProps) {
           {!isMobileDevice && (
             <text
               className="fill-red-400 font-medium"
-              {...gauge.getLabelProps({ angle: calcAngle(maxValueAchieved), offset: -100 })}
+              {...gauge.getLabelProps({ angle: calcAngle(guardedMaxValueAchieved), offset: -100 })}
             >
               {`${Math.round(maxValueAchieved).toLocaleString()} MAX TPS`}
             </text>
@@ -241,13 +242,17 @@ function Gauge(props: SpeedProps) {
 }
 
 export function TspGauge() {
-  const { tps, maxTps } = useGaugeData();
+  const { tps, maxTps, guardedMaxTps } = useGaugeData();
   const maxValueAchieved = Math.round(maxTps);
   // const tps = 30000;
   // const maxValueAchieved = 1800;
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
-      <Gauge value={tps} maxValueAchieved={maxValueAchieved} />
+      <Gauge
+        value={tps}
+        maxValueAchieved={maxValueAchieved}
+        guardedMaxValueAchieved={guardedMaxTps}
+      />
     </MotionConfig>
   );
 }
