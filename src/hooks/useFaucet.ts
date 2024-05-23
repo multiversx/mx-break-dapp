@@ -33,8 +33,8 @@ export const useFaucet = () => {
 
       setClaiming(true);
 
-      const bearerToken = accessToken || (await getAccessToken(address, encrypted));
       const useNativeAuth = API_URL.includes('devnet-') || API_URL.includes('testnet-');
+      const bearerToken = useNativeAuth ? await getAccessToken(address, encrypted) : '';
 
       try {
         const response = await fetch(`${extrasApi}/faucet`, {

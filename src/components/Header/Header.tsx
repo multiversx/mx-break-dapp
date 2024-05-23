@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useAccountUpdate } from 'hooks/useAccountUpdate';
 
 export const Header = () => {
+  useAccountUpdate();
+
   return (
     <header className="---sticky top-0 z-10 p-4 md:p-14">
       <nav className="flex items-center justify-between gap-2 sm:gap-x-6">

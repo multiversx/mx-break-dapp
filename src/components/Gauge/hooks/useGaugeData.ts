@@ -1,5 +1,5 @@
-import { useGetLatestTps } from '../../../hooks/useGetLatestTps';
-import { useGetMaxTps } from '../../../hooks/useGetMaxTps';
+import { useGetLatestTps } from 'hooks/useGetLatestTps';
+import { useGetMaxTps } from 'hooks/useGetMaxTps';
 import { useMemo } from 'react';
 
 export const GAUGE_MAX_VALUE = 60_000;

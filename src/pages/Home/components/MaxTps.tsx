@@ -1,6 +1,6 @@
-import { Stat } from '../../../components/Stat/Stat';
+import { Stat } from 'components/Stat/Stat';
 import { useEffect, useRef } from 'react';
-import { useGetMaxTps } from '../../../hooks/useGetMaxTps';
+import { useGetMaxTps } from 'hooks/useGetMaxTps';
 
 export const MaxTps = () => {
   const mountedRef = useRef(false);
