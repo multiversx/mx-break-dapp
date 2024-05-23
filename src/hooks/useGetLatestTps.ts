@@ -29,7 +29,7 @@ export const useGetLatestTps = () => {
     getLatestTps();
     const interval = setInterval(() => {
       getLatestTps();
-    }, 30000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [getLatestTps]);

@@ -6,8 +6,10 @@ import { useSpamming } from '../../../hooks/useSpamming';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
 export const SpamTheChain = () => {
-  const { address, balance } = useAppProvider();
+  const { address, balance, nonce } = useAppProvider();
   const { start, stop, spamming, transactionsSentCount } = useSpamming();
+
+  console.log('nonce=', nonce);
 
   const formattedBalance = formatAmount({
     input: !balance?.includes('...') ? balance ?? '0' : '0',
@@ -56,7 +58,7 @@ export const SpamTheChain = () => {
                 <div className="flex justify-start mx-1 my-2">
                   <span className="text-gray-400 text-md mb-2"> Sent: </span>
                   <span className="ml-2 font-medium text-teal text-md">
-                    {transactionsSentCount > 1000
+                    {transactionsSentCount > transactionsSentCount
                       ? transactionsSentCount / 1000 + 'K'
                       : transactionsSentCount}{' '}
                     txs

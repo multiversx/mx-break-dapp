@@ -10,16 +10,14 @@ import {
   setSignature,
   getSignatureCache,
 } from '../cache/signatureCache';
-import type { Transaction } from '@multiversx/sdk-core';
 
 export const useSpamming = () => {
   const { nonce } = useAppProvider();
   const [spamming, setSpamming] = useState(false);
-  const [transactionsSentCount, setTransactionSentCount] = useState(0);
+  const [transactionsSentCount, setTransactionSentCount] = useState(nonce);
   const infiniteSpamming = useRef(true);
   const latestNonceRef = useRef(nonce);
   const startSignatureNonceRef = useRef(nonce);
-  const failedTransactionsRef = useRef<Transaction[]>([]);
 
   const { generateSignedTransaction } = useGenerateSignedTransaction();
 
@@ -40,7 +38,7 @@ export const useSpamming = () => {
         await delay(1);
       }
     }
-  }, [generateSignedTransaction, nonce]);
+  }, [generateSignedTransaction]);
 
   const getNextBatch = useCallback(() => {
     const batch = [];
@@ -54,25 +52,6 @@ export const useSpamming = () => {
     return batch;
   }, []);
 
-  // const retryFailedTransactions = useCallback(async () => {
-  //   while (infiniteSpamming.current && failedTransactionsRef.current.length > 0) {
-  //     const transaction = failedTransactionsRef.current.shift();
-  //
-  //     if (!transaction) {
-  //       continue;
-  //     }
-  //
-  //     try {
-  //       await sendSignedTransactions([transaction]);
-  //       console.log(`Requeued transaction with nonce ${transaction.nonce} succeeded.`);
-  //     } catch (e: unknown) {
-  //       // Requeue the transaction again
-  //       failedTransactionsRef.current.push(transaction);
-  //       await delay(10);
-  //     }
-  //   }
-  // }, []);
-
   const spam = useCallback(async () => {
     while (infiniteSpamming.current) {
       const batch = getNextBatch();
@@ -82,9 +61,7 @@ export const useSpamming = () => {
         await sendSignedTransactions(batch);
       } catch (e) {
         // Add failed transactions to retry list
-        failedTransactionsRef.current.push(...batch);
       } finally {
-        setTransactionSentCount((prev) => prev + batch.length);
         await delay(delayBetweenTransactions);
       }
     }
@@ -99,7 +76,6 @@ export const useSpamming = () => {
     setTimeout(() => {
       spam();
     }, 1000);
-    // retryFailedTransactions();
   };
 
   const stop = () => {
@@ -114,6 +90,7 @@ export const useSpamming = () => {
 
     const interval = setInterval(() => {
       latestNonceRef.current = nonce;
+      setTransactionSentCount(nonce);
     }, 1000);
 
     return () => clearInterval(interval);

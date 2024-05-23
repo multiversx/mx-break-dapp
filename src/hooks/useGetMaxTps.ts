@@ -10,7 +10,7 @@ export const useGetMaxTps = () => {
     setPending(true);
 
     try {
-      const response = await fetch(`${API_URL}/tps/latest/30s`, {
+      const response = await fetch(`${API_URL}/tps/max`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const useGetMaxTps = () => {
     getLatestTps();
     const interval = setInterval(() => {
       getLatestTps();
-    }, 30000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [getLatestTps]);

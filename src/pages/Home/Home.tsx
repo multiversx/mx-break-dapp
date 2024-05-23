@@ -1,31 +1,40 @@
+import { Hero } from '../../components/Hero';
+import { TspGauge } from '../../components/Gauge/TpsGauge';
 import { TrendChart } from '../../components/TrendChart/TrendChart';
-import { useGetLatestTps } from '../../hooks/useGetLatestTps';
-import { Speedometer } from '../../components/Speedometer/Speedometer';
+import { TotalTransactions } from './components/TotalTransactions';
+import { MaxTps } from './components/MaxTps';
+import { SpamSection } from './components/SpamSection';
 
 export const Home = () => {
-  const { tps } = useGetLatestTps();
-
   return (
-    <div className="w-full mt-10 flex p-6 my-auto flex-col gap-12">
-      <div className="flex gap-12 flex-wrap">
-        <div className="max-w-sm w-full rounded-lg shadow dark:bg-neutral-950 p-4 md:p-6 flex">
-          <div className="flex justify-between">
-            <div className="flex-1">
-              <h5 className="leading-none text-3xl font-bold dark:text-teal pb-2">
-                TPS {Math.round(tps)}
-              </h5>
-              <p className="font-normal text-xs dark:text-teal">in the last 30 seconds</p>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-sm w-full rounded-lg shadow dark:bg-neutral-950 p-4 md:p-6 flex">
-          <Speedometer speed={tps} />
+    <Hero>
+      <div className="hero-gradient text-transparent bg-clip-text text-center text-3xl md:text-4xl font-medium tracking-tight mt-12 md:mt-4">
+        Move fast and break chains
+        <span className="hidden sm:block" />
+        with Sovereign Speed
+      </div>
+
+      <div className="gap-3 text-center p-6 md:p-6">
+        <TspGauge />
+      </div>
+
+      <div className="w-full relative md:flex md:flex-row md:justify-end md:gap-4 mt-0 md:mt-32">
+        <TrendChart />
+        <div className="flex-1 flex flex-col md:flex-row gap-2 md:gap-5 p-4 md:p-0">
+          <TotalTransactions />
+          <MaxTps />
         </div>
       </div>
 
-      <div className="w-full flex justify-center mx-auto text-xs">
-        <TrendChart />
+      <div className="text-white text-center text-4xl md:text-6xl font-medium mt-20 md:mt-10">
+        Will it break? Can you break it?
       </div>
-    </div>
+
+      <div className="w-full p-4 flex justify-center">
+        <div className="p-4 rounded-2xl bg-neutral-900 w-full md:max-w-[80%]">
+          <SpamSection />
+        </div>
+      </div>
+    </Hero>
   );
 };
