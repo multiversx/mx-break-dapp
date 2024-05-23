@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoutes } from './routes';
-import { PageNotFound } from './pages/PageNotFound';
 import { Header } from './components/Header';
 import { Home } from 'pages/Home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -19,7 +18,7 @@ function App() {
           <Header />
           <Routes>
             <Route path={AppRoutes.HOME} element={<Home />} />
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="*" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </div>
