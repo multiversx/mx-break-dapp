@@ -18,17 +18,17 @@ export const useFaucet = () => {
   const claimTokens = useCallback(
     async (captcha: string) => {
       if (!address) {
-        console.error('No address found');
+        console.warn('No address found');
         return false;
       }
 
       if (!encrypted) {
-        console.error('No encrypted wallet found');
+        console.warn('No encrypted wallet found');
         return false;
       }
 
       if (!captcha) {
-        console.error('No captcha found');
+        console.warn('No captcha found');
         return false;
       }
 
@@ -48,14 +48,13 @@ export const useFaucet = () => {
         });
 
         if (!response.ok) {
-          console.error('Failed to claim tokens', response);
+          console.warn('Failed to claim tokens', response);
           return;
         }
 
-        // alert('Successfully claimed tokens. Check your balance in a few moments.');
         setSuccessfullyClaimedTokens(() => true);
       } catch (error) {
-        console.error('Error claiming tokens', error);
+        console.warn('Error claiming tokens', error);
         setSuccessfullyClaimedTokens(() => true);
       } finally {
         setSuccessfullyClaimedTokens(() => true);

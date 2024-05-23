@@ -33,7 +33,8 @@ export const useGaugeData = () => {
   }, [maxTps]);
 
   return {
-    tps: guardedTpsValue,
+    tps,
+    guardedTpsValue,
     maxTps,
     guardedMaxTps,
   };

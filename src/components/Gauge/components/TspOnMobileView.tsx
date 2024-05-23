@@ -15,17 +15,13 @@ export const TspOnMobileView = ({
         <div className="flex flex-col justify-center items-center">
           <div className="flex justify-center items-center gap-1">
             <div className="text-xs font-medium text-red-400">
-              {maxValueAchieved > 60_000
-                ? `${Math.round(maxValueAchieved / 1000).toLocaleString()}K`
-                : maxValueAchieved.toLocaleString()}
+              {Math.round(maxValueAchieved).toLocaleString()}
             </div>
             <span className="text-xs font-medium text-red-400 text-left">MAX TPS</span>
           </div>
           <div className="flex justify-center items-center mt-1">
             <div className="text-3xl font-medium text-neutral-200">
-              {value > 60_000
-                ? `${Math.round(value / 1000).toLocaleString()}K`
-                : Math.round(value).toLocaleString()}
+              {Math.round(value).toLocaleString()}
             </div>
           </div>
         </div>

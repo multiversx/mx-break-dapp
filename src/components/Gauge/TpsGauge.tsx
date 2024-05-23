@@ -11,6 +11,7 @@ const END_ANGLE = 290;
 
 interface SpeedProps {
   value: number;
+  guardedValue: number;
   maxValueAchieved?: number;
   guardedMaxValueAchieved?: number;
 }
@@ -70,7 +71,7 @@ const arcGradient = (value: number) => {
 };
 
 function Gauge(props: SpeedProps) {
-  const { value, maxValueAchieved = 0, guardedMaxValueAchieved = 0 } = props;
+  const { guardedValue, maxValueAchieved = 0, guardedMaxValueAchieved = 0 } = props;
   const isMobileDevice = getIsMobileDeviceScreen();
 
   // Compute the angle using linear interpolation within the range
@@ -105,7 +106,7 @@ function Gauge(props: SpeedProps) {
   });
 
   const needle = gauge.getNeedleProps({
-    value: value,
+    value: guardedValue,
     baseRadius: 8,
     tipRadius: 2,
     offset: -15,
@@ -114,7 +115,7 @@ function Gauge(props: SpeedProps) {
   return (
     <div className="relative">
       <svg className="w-full overflow-visible p-6 top-0 left-0" {...gauge.getSVGProps()}>
-        <defs>{arcGradient(value)}</defs>
+        <defs>{arcGradient(guardedValue)}</defs>
 
         <g id="arcs">
           <path
@@ -129,23 +130,23 @@ function Gauge(props: SpeedProps) {
             strokeWidth={24}
           />
 
-          <path
-            {...gauge.getArcProps({
-              offset: 20,
-              startAngle: -START_ANGLE + 4,
-              endAngle: -END_ANGLE - 60,
-            })}
-            fill="none"
-            className="stroke-gauge-bottom-arc-right"
-            strokeLinecap="square"
-            strokeWidth={2}
-          />
+          {/*<path*/}
+          {/*  {...gauge.getArcProps({*/}
+          {/*    offset: 20,*/}
+          {/*    startAngle: -START_ANGLE + 4,*/}
+          {/*    endAngle: -END_ANGLE - 60,*/}
+          {/*  })}*/}
+          {/*  fill="none"*/}
+          {/*  className="stroke-blue-400"*/}
+          {/*  strokeLinecap="round"*/}
+          {/*  strokeWidth={1}*/}
+          {/*/>*/}
 
           <path
             {...gauge.getArcProps({
               offset: 30,
               startAngle: START_ANGLE,
-              endAngle: gauge.valueToAngle(value),
+              endAngle: gauge.valueToAngle(guardedValue),
             })}
             fill="none"
             stroke={`url(#arc-value-gradient)`}
@@ -233,16 +234,16 @@ function Gauge(props: SpeedProps) {
         </g>
       </svg>
       {isMobileDevice ? (
-        <TspOnMobileView value={value} maxValueAchieved={maxValueAchieved} />
+        <TspOnMobileView value={guardedValue} maxValueAchieved={maxValueAchieved} />
       ) : (
-        <TspOnDesktopView value={value} />
+        <TspOnDesktopView value={guardedValue} />
       )}
     </div>
   );
 }
 
 export function TspGauge() {
-  const { tps, maxTps, guardedMaxTps } = useGaugeData();
+  const { tps, guardedTpsValue, maxTps, guardedMaxTps } = useGaugeData();
   const maxValueAchieved = Math.round(maxTps);
   // const tps = 30000;
   // const maxValueAchieved = 1800;
@@ -250,6 +251,7 @@ export function TspGauge() {
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
       <Gauge
         value={tps}
+        guardedValue={guardedTpsValue}
         maxValueAchieved={maxValueAchieved}
         guardedMaxValueAchieved={guardedMaxTps}
       />

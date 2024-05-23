@@ -10,14 +10,16 @@ import {
   setSignature,
   getSignatureCache,
 } from '../cache/signatureCache';
+import { getFormattedBalance } from 'helpers/getFormattedBalance';
 
 export const useSpamming = () => {
-  const { nonce, address } = useAppProvider();
+  const { nonce, address, balance } = useAppProvider();
   const [spamming, setSpamming] = useState(false);
   const [transactionsSentCount, setTransactionSentCount] = useState(nonce);
   const infiniteSpamming = useRef(true);
   const previousAddressRef = useRef(address);
   const latestNonceRef = useRef(nonce);
+  const latestBalanceRef = useRef(balance);
   const startSignatureNonceRef = useRef(nonce);
 
   const { generateSignedTransaction } = useGenerateSignedTransaction();
@@ -89,6 +91,13 @@ export const useSpamming = () => {
       clearSignatureCache();
       startSignatureNonceRef.current = nonce;
       previousAddressRef.current = address;
+    }
+
+    if (Number(getFormattedBalance(balance ?? '0')) < 0.1 && latestBalanceRef.current !== balance) {
+      stop();
+      clearSignatureCache();
+      startSignatureNonceRef.current = nonce;
+      latestBalanceRef.current = balance;
     }
 
     removeSignaturesBeforeNonce(nonce);

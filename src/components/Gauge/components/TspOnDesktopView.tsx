@@ -8,9 +8,7 @@ export const TspOnDesktopView = ({ value }: { value: number }) => {
         </div>
         <div className="flex justify-center items-center mt-2">
           <div className="text-3xl font-medium text-neutral-200">
-            {value > 60_000
-              ? `${Math.round(value / 1000).toLocaleString()}K`
-              : Math.round(value).toLocaleString()}
+            {Math.round(value).toLocaleString()}
           </div>
         </div>
       </div>
