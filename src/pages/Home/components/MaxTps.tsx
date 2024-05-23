@@ -28,7 +28,7 @@ export const MaxTps = () => {
 
   return (
     <Stat title="Max TPS Achieved">
-      <div className="text-red-500">{maxTps.toLocaleString()}</div>
+      <div className="text-red-500">{Math.round(maxTps).toLocaleString()}</div>
     </Stat>
   );
 };

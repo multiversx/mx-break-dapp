@@ -9,8 +9,6 @@ export const SpamTheChain = () => {
   const { address, balance, nonce } = useAppProvider();
   const { start, stop, spamming, transactionsSentCount } = useSpamming();
 
-  console.log('nonce=', nonce);
-
   const formattedBalance = formatAmount({
     input: !balance?.includes('...') ? balance ?? '0' : '0',
     decimals: 18,

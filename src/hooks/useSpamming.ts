@@ -30,7 +30,6 @@ export const useSpamming = () => {
           continue;
         }
 
-        console.log({ cache: getSignatureCache() });
         setSignature(cached.nonce, cached.transaction);
       } catch (e) {
         // IGNORE
@@ -55,7 +54,6 @@ export const useSpamming = () => {
   const spam = useCallback(async () => {
     while (infiniteSpamming.current) {
       const batch = getNextBatch();
-      console.log({ lastNonce: latestNonceRef.current, batch });
 
       try {
         await sendSignedTransactions(batch);

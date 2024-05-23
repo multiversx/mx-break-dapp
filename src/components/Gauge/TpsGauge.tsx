@@ -194,9 +194,7 @@ function Gauge(props: SpeedProps) {
               className="fill-red-400 font-medium"
               {...gauge.getLabelProps({ angle: calcAngle(maxValueAchieved), offset: -100 })}
             >
-              {maxValueAchieved >= 1000
-                ? `${maxValueAchieved.toLocaleString()} MAX TPS`
-                : `${maxValueAchieved} MAX TPS`}
+              {`${Math.round(maxValueAchieved).toLocaleString()} MAX TPS`}
             </text>
           )}
         </g>
