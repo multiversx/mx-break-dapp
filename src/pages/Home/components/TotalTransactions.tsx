@@ -13,7 +13,7 @@ export const TotalTransactions = () => {
   if (error) {
     return (
       <Stat title="Total Transactions">
-        <div className="text-neutral-300">Error</div>
+        <div className="text-neutral-300">-</div>
       </Stat>
     );
   }
