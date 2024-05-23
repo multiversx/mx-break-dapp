@@ -2,6 +2,10 @@ import React, { useMemo } from 'react';
 import { useGauge } from 'use-gauge';
 import { motion, MotionConfig } from 'framer-motion';
 import { useGetLatestTps } from '../../hooks/useGetLatestTps.ts';
+import { getIsMobileDeviceScreen } from '../../helpers/getIsMobileDevideScreen.ts';
+import { TspOnMobileView } from './components/TspOnMobileView.tsx';
+import { TspOnDesktopView } from './components/TspOnDesktopView.tsx';
+import { useGetMaxTps } from '../../hooks/useGetMaxTps.ts';
 // import CenterIcon from '../../assets/06.svg?react';
 
 const START_ANGLE = 70;
@@ -86,6 +90,7 @@ const arcGradient = (value: number) => {
 
 function Speed(props: SpeedProps) {
   const { value, maxValueAchieved = 0 } = props;
+  const isMobileDevice = getIsMobileDeviceScreen();
 
   const guardedValue = useMemo(() => {
     if (value < 0) {
@@ -99,17 +104,22 @@ function Speed(props: SpeedProps) {
     return value;
   }, [value]);
 
-  // Compute the angle using linear interpolation within the range
-  const calcAngle = (value: number) => {
-    if (value <= 0) {
-      return 0;
+  const guardedMaxValueAchieved = useMemo(() => {
+    if (maxValueAchieved <= 0) {
+      return 1;
     }
-    if (value > MAX_SPEED) {
+
+    if (maxValueAchieved > MAX_SPEED) {
       return MAX_SPEED;
     }
 
+    return maxValueAchieved;
+  }, [maxValueAchieved]);
+
+  // Compute the angle using linear interpolation within the range
+  const calcAngle = (val: number) => {
     // Compute the proportion of the value within the range
-    const proportion = value / MAX_SPEED;
+    const proportion = val / MAX_SPEED;
 
     // Compute the corresponding angle within the angle range
     const angle = START_ANGLE + proportion * (END_ANGLE - START_ANGLE);
@@ -132,14 +142,10 @@ function Speed(props: SpeedProps) {
     numTicks: 1,
     diameter: 390,
   });
-  console.log('1', gaugeMaxTps.getTickProps({ angle: 0, length: 20 }));
-
   const gaugeMaxTpsTickProps = gaugeMaxTps.getTickProps({
-    angle: calcAngle(maxValueAchieved),
+    angle: calcAngle(guardedMaxValueAchieved),
     length: 50,
   });
-
-  console.log('2', gaugeMaxTpsTickProps);
 
   const needle = gauge.getNeedleProps({
     value: guardedValue,
@@ -149,7 +155,7 @@ function Speed(props: SpeedProps) {
 
   return (
     <div className="relative">
-      <svg className="w-full overflow-visible p-4 top-0 left-0" {...gauge.getSVGProps()}>
+      <svg className="w-full overflow-visible p-6 top-0 left-0" {...gauge.getSVGProps()}>
         <defs>{arcGradient(value)}</defs>
 
         <g id="arcs">
@@ -226,15 +232,17 @@ function Speed(props: SpeedProps) {
             strokeWidth={2}
             height={10}
             {...gaugeMaxTpsTickProps}
-            // y1={gaugeMaxTpsTickProps.y1}
-            // y2={gaugeMaxTpsTickProps.y2}
           />
-          <text
-            className="fill-red-400 font-medium"
-            {...gauge.getLabelProps({ angle: calcAngle(maxValueAchieved), offset: -100 })}
-          >
-            {`${maxValueAchieved / 1000}K MAX TPS`}
-          </text>
+          {!isMobileDevice && (
+            <text
+              className="fill-red-400 font-medium"
+              {...gauge.getLabelProps({ angle: calcAngle(guardedMaxValueAchieved), offset: -100 })}
+            >
+              {guardedMaxValueAchieved >= 1000
+                ? `${guardedMaxValueAchieved.toLocaleString()} MAX TPS`
+                : `${guardedMaxValueAchieved} MAX TPS`}
+            </text>
+          )}
         </g>
         <g id="needle">
           <motion.line
@@ -259,30 +267,21 @@ function Speed(props: SpeedProps) {
           />
         </g>
       </svg>
-      <div className="absolute" style={{ top: '80%', left: '38%' }}>
-        {/*<CenterIcon />*/}
-        <div className="flex justify-center flex-col mt-2">
-          <div className="flex items-center gap-1">
-            <span className="w-3 h-3 me-2 text-sm text-left font-semibold text-teal bg-teal rounded-full" />
-            <span className="text-sm font-medium text-teal text-left">Live TPS</span>
-          </div>
-          <div className="flex justify-center items-center mt-2">
-            <div className="text-3xl font-medium text-neutral-200">
-              {value > 60_000
-                ? `${Math.round(value / 1000).toLocaleString()}K`
-                : Math.round(value).toLocaleString()}
-            </div>
-          </div>
-        </div>
-      </div>
+      {isMobileDevice ? (
+        <TspOnMobileView value={value} maxValueAchieved={guardedMaxValueAchieved} />
+      ) : (
+        <TspOnDesktopView value={value} />
+      )}
     </div>
   );
 }
 
-export function TspGauge({ _maxValueAchieved }: { _maxValueAchieved?: number }) {
-  // const value = useSpeedTest();
-  const value = 30_111;
-  const maxValueAchieved = 47800;
+export function TspGauge() {
+  const value = useSpeedTest();
+  const { maxTps } = useGetMaxTps();
+  const maxValueAchieved = Math.round(maxTps);
+  // const value = 30_111;
+  // const maxValueAchieved = 1800;
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
       <Speed value={value} maxValueAchieved={maxValueAchieved} />
