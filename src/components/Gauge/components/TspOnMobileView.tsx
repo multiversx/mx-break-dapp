@@ -17,7 +17,7 @@ export const TspOnMobileView = ({
         <div className="flex flex-col justify-center items-center">
           <div className="flex justify-center items-center gap-1">
             <div className="text-xs font-medium text-red-400">
-              {Math.round(maxValueAchieved).toLocaleString()}
+              <AnimateNumber amount={Math.round(maxValueAchieved)} />
             </div>
             <span className="text-xs font-medium text-red-400 text-left">MAX TPS</span>
           </div>
