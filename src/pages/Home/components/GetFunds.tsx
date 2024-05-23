@@ -41,34 +41,39 @@ export const GetFunds = () => {
     >
       <div className="flex items-center justify-between font-roobert-semibold">
         <div className={`flex flex-col md:text-right ${showBalance ? 'hidden' : ''}`}>
-          <div className="text-neutral-200 text-sm mb-2">Balance</div>
+          <div className="text-neutral-200 text-sm mb-2">
+            {!showRecaptcha && claiming && (
+              <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2 text-white" spin />
+            )}
+            Balance
+          </div>
           <div className="font-roobert-medium max-w-50 text-wrap break-all text-teal">
             {formattedBalance} Space Credits
           </div>
         </div>
 
-        {showRecaptcha ? (
-          <div className="flex flex-col">
+        {showRecaptcha && (
+          <div className="flex flex-col xl:flex-row xl:items-center gap-2">
             {address && (
               <div className="faucet-recaptcha">
                 <ReCAPTCHA sitekey={sitekey} onChange={onRecaptchaChange} theme="dark" />
               </div>
             )}
-            <button
-              disabled={requestDisabled || claiming}
-              onClick={() => claimTokens(captcha)}
-              className={`mr-0 flex items-center px-4 py-2 rounded-xl ${!address ? 'bg-neutral-700 text-neutral-400' : 'bg-teal text-black '}`}
-            >
-              {claiming && <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2" />}
-              <span>
-                {' '}
-                <FontAwesomeIcon icon={faWallet} className="mr-2" />
-                Get Space Credits
-              </span>
-            </button>
+            <div>
+              <button
+                disabled={requestDisabled || claiming}
+                onClick={() => claimTokens(captcha)}
+                className={`mr-0 flex items-center px-4 py-2 rounded-xl ${!address ? 'bg-neutral-700 text-neutral-400' : 'bg-teal text-black '}`}
+              >
+                {claiming && <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2" />}
+                <span>
+                  {' '}
+                  <FontAwesomeIcon icon={faWallet} className="mr-2" />
+                  Get Space Credits
+                </span>
+              </button>
+            </div>
           </div>
-        ) : (
-          claiming && <FontAwesomeIcon icon={faSpinner} className="fa-1x mx-2 text-white" spin />
         )}
       </div>
     </SpammerItem>
