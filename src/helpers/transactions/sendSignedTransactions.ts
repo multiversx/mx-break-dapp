@@ -9,7 +9,7 @@ export async function sendSignedTransactions(
 ): Promise<SendSignedTransactionsReturnType> {
   return axios.post(
     `${proxyAddress}/transaction/send-multiple`,
-    signedTransactions.splice(0, 5).map((x) => x.toPlainObject()),
+    signedTransactions.map((x) => x.toPlainObject()),
     {
       timeout: apiTimeout,
     }
