@@ -113,7 +113,7 @@ function Gauge(props: SpeedProps) {
   });
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <svg className="w-full overflow-visible p-6 top-0 left-0" {...gauge.getSVGProps()}>
         <defs>{arcGradient(guardedValue)}</defs>
 
