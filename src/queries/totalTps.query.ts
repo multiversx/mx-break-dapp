@@ -3,7 +3,7 @@ import { API_URL } from 'config';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetTotalTpsQuery = () => {
-  const pollInterval = 1000;
+  const pollInterval = 5000;
   const url = `${API_URL}/tps/count`;
 
   const queryFn = async <TData>() => {

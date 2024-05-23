@@ -8,7 +8,7 @@ import { AccountType } from '@multiversx/sdk-dapp/types';
 export const useGetAccountQuery = () => {
   const { address, dispatch, actions } = useAppProvider();
 
-  const pollInterval = 1000;
+  const pollInterval = 5000;
   const url = `${API_URL}/accounts/${address}`;
 
   const queryFn = async <TData>() => {

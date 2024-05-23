@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Tick } from 'types/tick';
 
 export const useGetHistoricalTpsQuery = () => {
-  const pollInterval = 1000;
+  const pollInterval = 5000;
   const url = `${API_URL}/tps/history`;
 
   const queryFn = async <TData>() => {
