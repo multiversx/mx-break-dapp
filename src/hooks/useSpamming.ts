@@ -12,10 +12,11 @@ import {
 } from '../cache/signatureCache';
 
 export const useSpamming = () => {
-  const { nonce } = useAppProvider();
+  const { nonce, address } = useAppProvider();
   const [spamming, setSpamming] = useState(false);
   const [transactionsSentCount, setTransactionSentCount] = useState(nonce);
   const infiniteSpamming = useRef(true);
+  const previousAddressRef = useRef(address);
   const latestNonceRef = useRef(nonce);
   const startSignatureNonceRef = useRef(nonce);
 
@@ -83,6 +84,13 @@ export const useSpamming = () => {
   };
 
   useEffect(() => {
+    if (previousAddressRef.current !== address) {
+      stop();
+      clearSignatureCache();
+      startSignatureNonceRef.current = nonce;
+      previousAddressRef.current = address;
+    }
+
     removeSignaturesBeforeNonce(nonce);
     latestNonceRef.current = nonce;
 
@@ -92,7 +100,7 @@ export const useSpamming = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [nonce]);
+  }, [nonce, address]);
 
   useEffect(() => {
     return () => {
