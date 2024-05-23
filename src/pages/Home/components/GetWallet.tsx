@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faSpinner, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { Trim } from '@multiversx/sdk-dapp/UI';
 import { SpammerItem } from '../../../components/SpammerCard/SpammerItem';
 import { useAppProvider } from '../../../AppContext';
@@ -8,7 +8,7 @@ import { explorerAddress } from 'config';
 
 export const GetWallet = () => {
   const { address } = useAppProvider();
-  const generateWallet = useGenerateWallet();
+  const { generateWallet, pending } = useGenerateWallet();
   const { dispatch, actions } = useAppProvider();
 
   const onDisconnect = () => {
@@ -28,6 +28,7 @@ export const GetWallet = () => {
             onClick={generateWallet}
             className="mr-0 flex items-center bg-teal text-black text-sm p-4 rounded-2xl"
           >
+            {pending && <FontAwesomeIcon icon={faSpinner} className="mr-2" spin />}
             <FontAwesomeIcon icon={faWallet} className="mr-2" />
             Generate Wallet
           </button>

@@ -50,7 +50,7 @@ export const useBalanceUpdate = () => {
     }
     timeout.current = setInterval(() => {
       updateBalance();
-    }, 6000);
+    }, 1500);
 
     return () => clearInterval(timeout.current);
   }, [updateBalance]);
