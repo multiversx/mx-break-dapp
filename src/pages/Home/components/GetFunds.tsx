@@ -3,7 +3,7 @@ import { faSpinner, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { SpammerItem } from '../../../components/SpammerCard/SpammerItem';
 import { useAppProvider } from '../../../AppContext';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFaucet } from '../../../hooks/useFaucet';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
 
@@ -33,6 +33,13 @@ export const GetFunds = () => {
 
   const showRecaptcha = !claiming && canClaimTokens;
   const showBalance = (!successfullyClaimedTokens && claiming) || showRecaptcha;
+
+  useEffect(() => {
+    if (!address) {
+      setCaptcha('');
+      setRequestDisabled(true);
+    }
+  }, [address]);
 
   return (
     <SpammerItem

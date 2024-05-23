@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppProvider } from '../AppContext';
 import { API_URL, extrasApi } from 'config';
 import { getAccessToken } from 'helpers/accessToken/getAccessToken';
@@ -8,6 +8,7 @@ export const useFaucet = () => {
   const [claiming, setClaiming] = useState(false);
   const [successfullyClaimedTokens, setSuccessfullyClaimedTokens] = useState(false);
   const { address, encrypted, balance, accessToken } = useAppProvider();
+  const previousAddressRef = useRef(address);
 
   const formattedBalance = formatAmount({
     input: !balance?.includes('...') ? balance ?? '0' : '0',
@@ -64,13 +65,19 @@ export const useFaucet = () => {
   );
 
   useEffect(() => {
+    if (previousAddressRef.current !== address) {
+      setSuccessfullyClaimedTokens(false);
+      setClaiming(false);
+      previousAddressRef.current = address;
+    }
+
     if (successfullyClaimedTokens && Number(formattedBalance) > 1) {
       setClaiming(false);
     }
     if (Number(formattedBalance) > 1) {
       setSuccessfullyClaimedTokens(true);
     }
-  }, [formattedBalance, successfullyClaimedTokens]);
+  }, [formattedBalance, successfullyClaimedTokens, address]);
 
   return {
     claimTokens,
