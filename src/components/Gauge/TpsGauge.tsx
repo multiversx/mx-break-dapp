@@ -27,6 +27,7 @@ const useSpeedTest = () => {
 
 interface SpeedProps {
   value: number;
+  maxValueAchieved?: number;
 }
 
 const arcGradient = (value: number) => {
@@ -84,7 +85,7 @@ const arcGradient = (value: number) => {
 };
 
 function Speed(props: SpeedProps) {
-  const { value } = props;
+  const { value, maxValueAchieved = 0 } = props;
 
   const guardedValue = useMemo(() => {
     if (value < 0) {
@@ -98,6 +99,24 @@ function Speed(props: SpeedProps) {
     return value;
   }, [value]);
 
+  // Compute the angle using linear interpolation within the range
+  const calcAngle = (value: number) => {
+    if (value <= 0) {
+      return 0;
+    }
+    if (value > MAX_SPEED) {
+      return MAX_SPEED;
+    }
+
+    // Compute the proportion of the value within the range
+    const proportion = value / MAX_SPEED;
+
+    // Compute the corresponding angle within the angle range
+    const angle = START_ANGLE + proportion * (END_ANGLE - START_ANGLE);
+
+    return Math.round(angle);
+  };
+
   const gauge = useGauge({
     domain: [0, 60_000],
     startAngle: START_ANGLE,
@@ -105,6 +124,22 @@ function Speed(props: SpeedProps) {
     numTicks: 19,
     diameter: 400,
   });
+
+  const gaugeMaxTps = useGauge({
+    domain: [0, 60_000],
+    startAngle: START_ANGLE,
+    endAngle: END_ANGLE,
+    numTicks: 1,
+    diameter: 390,
+  });
+  console.log('1', gaugeMaxTps.getTickProps({ angle: 0, length: 20 }));
+
+  const gaugeMaxTpsTickProps = gaugeMaxTps.getTickProps({
+    angle: calcAngle(maxValueAchieved),
+    length: 50,
+  });
+
+  console.log('2', gaugeMaxTpsTickProps);
 
   const needle = gauge.getNeedleProps({
     value: guardedValue,
@@ -170,7 +205,7 @@ function Speed(props: SpeedProps) {
                   height={10}
                   {...gauge.getTickProps({
                     angle,
-                    length: 8,
+                    length: showText ? 14 : 8,
                   })}
                 />
                 {showText && (
@@ -184,6 +219,22 @@ function Speed(props: SpeedProps) {
               </React.Fragment>
             );
           })}
+        </g>
+        <g id="ticks">
+          <line
+            className={'stroke-red-700'}
+            strokeWidth={2}
+            height={10}
+            {...gaugeMaxTpsTickProps}
+            // y1={gaugeMaxTpsTickProps.y1}
+            // y2={gaugeMaxTpsTickProps.y2}
+          />
+          <text
+            className="fill-red-400 font-medium"
+            {...gauge.getLabelProps({ angle: calcAngle(maxValueAchieved), offset: -100 })}
+          >
+            {`${maxValueAchieved / 1000}K MAX TPS`}
+          </text>
         </g>
         <g id="needle">
           <motion.line
@@ -228,12 +279,13 @@ function Speed(props: SpeedProps) {
   );
 }
 
-export function TspGauge() {
-  const value = useSpeedTest();
-  // const value = 70_111;
+export function TspGauge({ _maxValueAchieved }: { _maxValueAchieved?: number }) {
+  // const value = useSpeedTest();
+  const value = 30_111;
+  const maxValueAchieved = 47800;
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
-      <Speed value={value} />
+      <Speed value={value} maxValueAchieved={maxValueAchieved} />
     </MotionConfig>
   );
 }
