@@ -1,3 +1,5 @@
+import { AnimateNumber } from 'components/AnimateNumber/AnimateNumber';
+
 export const TspOnMobileView = ({
   value,
   maxValueAchieved,
@@ -21,7 +23,7 @@ export const TspOnMobileView = ({
           </div>
           <div className="flex justify-center items-center mt-1">
             <div className="text-3xl font-medium text-neutral-200">
-              {Math.round(value).toLocaleString()}
+              <AnimateNumber amount={Math.round(value)} />
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { AnimateNumber } from 'components/AnimateNumber/AnimateNumber';
 import { Stat } from '../../../components/Stat/Stat';
 import { useGetTotalTransactions } from '../../../hooks/useGetTotalTransactions';
 import { useEffect, useRef } from 'react';
@@ -28,7 +29,9 @@ export const TotalTransactions = () => {
 
   return (
     <Stat title="Total Transactions">
-      <div className="text-neutral-300">{totalTransactions.toLocaleString()}</div>
+      <div className="text-neutral-300">
+        <AnimateNumber amount={totalTransactions} />
+      </div>
     </Stat>
   );
 };

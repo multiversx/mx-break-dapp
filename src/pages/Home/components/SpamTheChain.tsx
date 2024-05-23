@@ -4,6 +4,7 @@ import { SpammerItem } from '../../../components/SpammerCard/SpammerItem';
 import { useAppProvider } from '../../../AppContext';
 import { useSpamming } from '../../../hooks/useSpamming';
 import { formatAmount } from '@multiversx/sdk-dapp/utils';
+import { AnimateNumber } from 'components/AnimateNumber/AnimateNumber';
 
 export const SpamTheChain = () => {
   const { address, balance } = useAppProvider();
@@ -56,9 +57,13 @@ export const SpamTheChain = () => {
                 <div className="flex justify-start items-center gap-2 mt-2 md:justify-end font-roobert-semibold">
                   <span className="text-neutral-200 text-sm">Sent:</span>
                   <span className="font-medium text-teal text-md">
-                    {transactionsSentCount > transactionsSentCount
-                      ? transactionsSentCount / 1000 + 'K'
-                      : transactionsSentCount}{' '}
+                    <AnimateNumber
+                      amount={
+                        transactionsSentCount > transactionsSentCount
+                          ? transactionsSentCount / 1000
+                          : transactionsSentCount
+                      }
+                    />{' '}
                     txs
                   </span>
                 </div>
