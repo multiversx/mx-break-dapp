@@ -30,7 +30,15 @@ export const MaxTps = () => {
   return (
     <Stat title="Max TPS Achieved">
       <div className="text-red-500">
-        <AnimateNumber amount={Math.round(maxTps)} />
+        <a
+          href="https://explorer.voyager1.dev/blocks/be8f9f99701d169eb3723e1a4975d54cc29b1efef58e676c90644db563238ddd"
+          target="_blank"
+        >
+          <AnimateNumber
+            amount={Math.round(maxTps)}
+            className="hover:underline hover:text-red-500"
+          />
+        </a>
       </div>
     </Stat>
   );

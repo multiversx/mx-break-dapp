@@ -5,4 +5,4 @@ export const nativeAuth = true;
 export const extrasApi = 'https://extras-api.multiversx.com';
 export const delayBetweenTransactions = 50;
 export const transactionsBatchSize = 100;
-export const REFERENCE_MAX_TPS = 72_442;
+export const REFERENCE_MAX_TPS = 77_525;

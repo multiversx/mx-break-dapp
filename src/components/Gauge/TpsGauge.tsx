@@ -193,12 +193,20 @@ function Gauge(props: SpeedProps) {
             {...gaugeMaxTpsTickProps}
           />
           {!isMobileDevice && (
-            <text
-              className="fill-red-400 font-medium"
-              {...gauge.getLabelProps({ angle: calcAngle(guardedMaxValueAchieved), offset: -100 })}
+            <a
+              href="https://explorer.voyager1.dev/blocks/be8f9f99701d169eb3723e1a4975d54cc29b1efef58e676c90644db563238ddd"
+              target="_blank"
             >
-              {`${Math.round(maxValueAchieved).toLocaleString()} MAX TPS`}
-            </text>
+              <text
+                className="fill-red-400 font-medium hover:underline hover:text-red-500"
+                {...gauge.getLabelProps({
+                  angle: calcAngle(guardedMaxValueAchieved),
+                  offset: -100,
+                })}
+              >
+                {`${Math.round(maxValueAchieved).toLocaleString()} MAX TPS`}{' '}
+              </text>
+            </a>
           )}
         </g>
         <g id="needle">
