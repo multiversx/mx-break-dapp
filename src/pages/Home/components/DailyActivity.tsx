@@ -1,15 +1,15 @@
 import { explorerAddress } from 'config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { useGetTop10 } from 'hooks/useGetTop10';
+import { useGetDailyActivity } from 'hooks/useGetDailyActivity';
 
-export const Top10 = () => {
-  const { top10, first3colors } = useGetTop10();
+export const DailyActivity = () => {
+  const { dailyEntries } = useGetDailyActivity();
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <div className="text-white text-4xl font-medium">Top 10</div>
+        <div className="text-white text-4xl font-medium">Daily Activity</div>
       </div>
       <div className="flex flex-col gap-4">
         <div className="relative overflow-x-auto shadow-md rounded-lg">
@@ -17,47 +17,41 @@ export const Top10 = () => {
             <thead className="text-xs text-gray-700 uppercase bg-neutral-900 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Rank
+                  Date
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  MAX TPS
+                  Transactions / Day
                 </th>
                 <th scope="col" className="px-6 py-3 text-right">
-                  Block #
+                  MAX TPS
                 </th>
               </tr>
             </thead>
             <tbody>
-              {top10.map((item, index) => (
+              {dailyEntries.map((entry, index) => (
                 <tr key={index} className="border-b border-neutral-800">
                   <th
                     scope="row"
-                    className={`px-6 py-4 font-medium whitespace-nowrap ${
-                      index < 3 ? first3colors[index] : 'text-yellow-100'
-                    }`}
+                    className={`px-6 py-4 font-medium whitespace-nowrap ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
-                    {index + 1}
+                    {new Date(entry.timestamp).toLocaleString()}
                   </th>
                   <td
-                    className={`px-6 py-4 font-medium whitespace-nowrap ${
-                      index < 3 ? first3colors[index] : 'text-yellow-100'
-                    }`}
+                    className={`px-6 py-4 font-medium ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
-                    {item.maxTps.toLocaleString()}
+                    {entry.tpsPerDay.toLocaleString()}
                   </td>
                   <td
-                    className={`px-6 py-4 font-medium whitespace-nowrap ${
-                      index < 3 ? first3colors[index] : 'text-yellow-100'
-                    }`}
+                    className={`px-6 py-4 font-medium ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
                     <div className="flex flex-nowrap flex-shrink-0 justify-end">
                       <a
-                        href={`${explorerAddress}/blocks/${item.block}`}
+                        href={`${explorerAddress}/blocks/${entry.block}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1 font-medium p-2 hover:underline"
+                        className="flex items-center gap-1 p-2 hover:underline"
                       >
-                        <span className="mx-2 text-left">{item.block}</span>
+                        <span className="mx-2 text-left">{`${entry.maxTps.toLocaleString()} (block ${entry.block})`}</span>
                         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
                       </a>
                     </div>
