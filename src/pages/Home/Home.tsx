@@ -4,6 +4,7 @@ import { TrendChart } from '../../components/TrendChart/TrendChart';
 import { TotalTransactions } from './components/TotalTransactions';
 import { MaxTps } from './components/MaxTps';
 import { SpamSection } from './components/SpamSection';
+import { Top10 } from './components/Top10';
 
 export const Home = () => {
   return (
@@ -40,6 +41,12 @@ export const Home = () => {
             <div className="w-full p-4 flex justify-center relative flex-col items-center ">
               <div className="p-4 rounded-2xl bg-neutral-900 w-full md:max-w-[80%]">
                 <SpamSection />
+              </div>
+            </div>
+
+            <div className="w-full p-4 flex justify-center relative flex-col items-center ">
+              <div className="p-4 rounded-2xl w-full md:max-w-[80%]">
+                <Top10 />
               </div>
             </div>
           </div>
