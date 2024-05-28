@@ -6,6 +6,8 @@ import { useGetDailyActivity } from 'hooks/useGetDailyActivity';
 export const DailyActivity = () => {
   const { dailyEntries } = useGetDailyActivity();
 
+  if (!dailyEntries || dailyEntries.length === 0) return null;
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
@@ -34,24 +36,24 @@ export const DailyActivity = () => {
                     scope="row"
                     className={`px-6 py-4 font-medium whitespace-nowrap ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
-                    {new Date(entry.timestamp).toLocaleString()}
+                    {new Date(entry.date).toLocaleString()}
                   </th>
                   <td
                     className={`px-6 py-4 font-medium ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
-                    {entry.tpsPerDay.toLocaleString()}
+                    {entry.transactions.toLocaleString()}
                   </td>
                   <td
                     className={`px-6 py-4 font-medium ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
                     <div className="flex flex-nowrap flex-shrink-0 justify-end">
                       <a
-                        href={`${explorerAddress}/blocks/${entry.block}`}
+                        href={`${explorerAddress}/blocks/${entry.blockHash}`}
                         target="_blank"
                         rel="noreferrer"
                         className="flex items-center gap-1 p-2 hover:underline"
                       >
-                        <span className="mx-2 text-left">{`${entry.maxTps.toLocaleString()} (block ${entry.block})`}</span>
+                        <span className="mx-2 text-left">{`${entry.maxTps.toLocaleString()} (block ${entry.blockHash})`}</span>
                         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
                       </a>
                     </div>

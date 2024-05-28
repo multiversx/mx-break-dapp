@@ -6,6 +6,8 @@ import { useGetTop10 } from 'hooks/useGetTop10';
 export const Top10 = () => {
   const { top10, first3colors } = useGetTop10();
 
+  if (!top10 || top10.length === 0) return null;
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
@@ -28,7 +30,7 @@ export const Top10 = () => {
               </tr>
             </thead>
             <tbody>
-              {top10.map((item, index) => (
+              {top10?.map((item, index) => (
                 <tr key={index} className="border-b border-neutral-800">
                   <th
                     scope="row"
@@ -43,7 +45,7 @@ export const Top10 = () => {
                       index < 3 ? first3colors[index] : 'text-yellow-100'
                     }`}
                   >
-                    {item.maxTps.toLocaleString()}
+                    {item.txCount.toLocaleString()}
                   </td>
                   <td
                     className={`px-6 py-4 font-medium whitespace-nowrap ${
@@ -52,12 +54,12 @@ export const Top10 = () => {
                   >
                     <div className="flex flex-nowrap flex-shrink-0 justify-end">
                       <a
-                        href={`${explorerAddress}/blocks/${item.block}`}
+                        href={`${explorerAddress}/blocks/${item.hash}`}
                         target="_blank"
                         rel="noreferrer"
                         className="flex items-center gap-1 font-medium p-2 hover:underline"
                       >
-                        <span className="mx-2 text-left">{item.block}</span>
+                        <span className="mx-2 text-left">{item.hash}</span>
                         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
                       </a>
                     </div>
