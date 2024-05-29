@@ -4,7 +4,7 @@ export const useGetDailyActivity = () => {
   const { data, isLoading, isError } = useDailyActivity();
 
   return {
-    dailyEntries: data,
+    dailyEntries: data?.filter((entry) => Boolean(entry.maxTpsBlockHash)),
     isLoading,
     isError,
   };
