@@ -21,7 +21,7 @@ export const useGetTop10BlocksQuery = () => {
     never,
     AxiosError,
     {
-      hash: number;
+      hash: string;
       nonce: number;
       txCount: number;
     }[]

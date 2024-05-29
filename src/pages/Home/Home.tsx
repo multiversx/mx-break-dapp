@@ -46,10 +46,10 @@ export const Home = () => {
             </div>
 
             <div className="w-full p-4 flex justify-center relative flex-col md:flex-row md:max-w-[80%] gap-6">
-              <div className="p-4 rounded-2xl w-full md:max-w-[30%]">
+              <div className="p-4 rounded-2xl w-full md:max-w-[40%]">
                 <Top10 />
               </div>
-              <div className="p-4 rounded-2xl w-full md:max-w-[70%]">
+              <div className="p-4 rounded-2xl w-full md:max-w-[60%]">
                 <DailyActivity />
               </div>
             </div>

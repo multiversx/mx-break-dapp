@@ -36,7 +36,7 @@ export const DailyActivity = () => {
                     scope="row"
                     className={`px-6 py-4 font-medium whitespace-nowrap ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
-                    {new Date(entry.date).toLocaleString()}
+                    {entry.date}
                   </th>
                   <td
                     className={`px-6 py-4 font-medium ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
@@ -48,12 +48,12 @@ export const DailyActivity = () => {
                   >
                     <div className="flex flex-nowrap flex-shrink-0 justify-end">
                       <a
-                        href={`${explorerAddress}/blocks/${entry.blockHash}`}
+                        href={`${explorerAddress}/blocks/${entry.maxTpsBlockHash}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1 p-2 hover:underline"
+                        className="flex items-center gap-1 p-2 hover:underline w-[15rem]"
                       >
-                        <span className="mx-2 text-left">{`${entry.maxTps.toLocaleString()} (block ${entry.blockHash})`}</span>
+                        <span className="mx-2 text-left line-clamp-2">{`${entry.maxTps.toLocaleString()} (block ${entry.maxTpsBlockHash})`}</span>
                         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
                       </a>
                     </div>

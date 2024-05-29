@@ -57,9 +57,9 @@ export const Top10 = () => {
                         href={`${explorerAddress}/blocks/${item.hash}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1 font-medium p-2 hover:underline"
+                        className="flex items-center gap-1 font-medium p-2 hover:underline w-[10rem]"
                       >
-                        <span className="mx-2 text-left">{item.hash}</span>
+                        <span className="mx-2 text-left line-clamp-1">{item.hash}</span>
                         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
                       </a>
                     </div>

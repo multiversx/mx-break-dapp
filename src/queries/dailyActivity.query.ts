@@ -24,7 +24,7 @@ export const useDailyActivity = () => {
       date: string;
       transactions: number;
       maxTps: number;
-      blockHash: string;
+      maxTpsBlockHash: string;
     }[]
   >({
     queryKey: ['daily-activity'],
