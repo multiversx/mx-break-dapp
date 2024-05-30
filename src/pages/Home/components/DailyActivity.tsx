@@ -63,11 +63,11 @@ export const DailyActivity = () => {
                   <td
                     className={`px-4 md:px-6 py-4 font-medium ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                   >
-                    <div
-                      className={`flex flex-row gap-3 items-center text-left p-1 ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
+                    <span
+                      className={`flex flex-row gap-3 items-center justify-center p-1 ${index === 0 ? 'text-teal' : 'text-neutral-500'}`}
                     >
-                      <div className="flex text-left">{`${entry.maxTps.toLocaleString()}`}</div>
-                    </div>
+                      {`${entry.maxTps.toLocaleString()}`}
+                    </span>
                   </td>
                   {!isMobileDevice && (
                     <td
