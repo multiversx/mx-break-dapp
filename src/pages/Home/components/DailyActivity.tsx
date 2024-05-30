@@ -32,7 +32,7 @@ export const DailyActivity = () => {
                 <th scope="col" className="px-4 md:px-6 py-3">
                   TXS / Day
                 </th>
-                <th scope="col" className="px-4 md:px-6 py-3 text-right">
+                <th scope="col" className="px-4 md:px-6 py-3">
                   MAX TPS
                 </th>
                 {!isMobileDevice && (
