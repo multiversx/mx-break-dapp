@@ -5,6 +5,7 @@ import { getIsMobileDeviceScreen } from '../../helpers/getIsMobileDevideScreen';
 import { TspOnMobileView } from './components/TspOnMobileView';
 import { TspOnDesktopView } from './components/TspOnDesktopView';
 import { GAUGE_MAX_VALUE, useGaugeData } from './hooks/useGaugeData';
+import { REFERENCE_MAX_TPS } from '../../config';
 
 const START_ANGLE = 70;
 const END_ANGLE = 290;
@@ -130,18 +131,6 @@ function Gauge(props: SpeedProps) {
             strokeWidth={24}
           />
 
-          {/*<path*/}
-          {/*  {...gauge.getArcProps({*/}
-          {/*    offset: 20,*/}
-          {/*    startAngle: -START_ANGLE + 4,*/}
-          {/*    endAngle: -END_ANGLE - 60,*/}
-          {/*  })}*/}
-          {/*  fill="none"*/}
-          {/*  className="stroke-blue-400"*/}
-          {/*  strokeLinecap="round"*/}
-          {/*  strokeWidth={1}*/}
-          {/*/>*/}
-
           <path
             {...gauge.getArcProps({
               offset: 30,
@@ -192,13 +181,25 @@ function Gauge(props: SpeedProps) {
             height={10}
             {...gaugeMaxTpsTickProps}
           />
-          {!isMobileDevice && (
-            <a
-              href="https://explorer.voyager1.dev/blocks/be8f9f99701d169eb3723e1a4975d54cc29b1efef58e676c90644db563238ddd"
-              target="_blank"
-            >
+          {!isMobileDevice &&
+            (maxValueAchieved === REFERENCE_MAX_TPS ? (
+              <a
+                href="https://explorer.voyager1.dev/blocks/be8f9f99701d169eb3723e1a4975d54cc29b1efef58e676c90644db563238ddd"
+                target="_blank"
+              >
+                <text
+                  className="fill-red-400 font-medium hover:underline hover:text-red-500"
+                  {...gauge.getLabelProps({
+                    angle: calcAngle(guardedMaxValueAchieved),
+                    offset: -100,
+                  })}
+                >
+                  {`${Math.round(maxValueAchieved).toLocaleString()} MAX TPS`}{' '}
+                </text>
+              </a>
+            ) : (
               <text
-                className="fill-red-400 font-medium hover:underline hover:text-red-500"
+                className="fill-red-400 font-medium"
                 {...gauge.getLabelProps({
                   angle: calcAngle(guardedMaxValueAchieved),
                   offset: -100,
@@ -206,8 +207,7 @@ function Gauge(props: SpeedProps) {
               >
                 {`${Math.round(maxValueAchieved).toLocaleString()} MAX TPS`}{' '}
               </text>
-            </a>
-          )}
+            ))}
         </g>
         <g id="needle">
           <motion.line
@@ -253,8 +253,7 @@ function Gauge(props: SpeedProps) {
 export function TspGauge() {
   const { tps, guardedTpsValue, maxTps, guardedMaxTps } = useGaugeData();
   const maxValueAchieved = Math.round(maxTps);
-  // const tps = 30000;
-  // const maxValueAchieved = 1800;
+
   return (
     <MotionConfig transition={{ type: 'tween', ease: 'linear' }}>
       <Gauge
