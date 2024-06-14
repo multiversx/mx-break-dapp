@@ -2,7 +2,7 @@ import { Stat } from 'components/Stat/Stat';
 import { useEffect, useRef } from 'react';
 import { useGetMaxTps } from 'hooks/useGetMaxTps';
 import { AnimateNumber } from 'components/AnimateNumber/AnimateNumber';
-import { REFERENCE_MAX_TPS } from '../../../config';
+import { REFERENCE_MAX_TPS } from 'config';
 
 export const MaxTps = () => {
   const mountedRef = useRef(false);

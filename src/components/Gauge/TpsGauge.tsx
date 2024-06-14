@@ -5,7 +5,7 @@ import { getIsMobileDeviceScreen } from '../../helpers/getIsMobileDevideScreen';
 import { TspOnMobileView } from './components/TspOnMobileView';
 import { TspOnDesktopView } from './components/TspOnDesktopView';
 import { GAUGE_MAX_VALUE, useGaugeData } from './hooks/useGaugeData';
-import { REFERENCE_MAX_TPS } from '../../config';
+import { REFERENCE_MAX_TPS } from 'config';
 
 const START_ANGLE = 70;
 const END_ANGLE = 290;
