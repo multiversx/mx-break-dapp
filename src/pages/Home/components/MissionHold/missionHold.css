@@ -31,21 +31,16 @@
 }
 
 .mission-hold-title {
-  background: linear-gradient(90deg, #fff 76.84%, #23f7dd 106.96%);
+  background: linear-gradient(93deg, #fff 21.13%, #23f7dd 88.26%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 600;
   margin-bottom: 16px;
   padding: 0 32px;
+  line-height: 1.125;
   text-align: center;
-}
-
-@media (min-width: 576px) {
-  .mission-hold-title {
-    font-size: 40px;
-  }
 }
 
 @media (min-width: 768px) {
@@ -115,27 +110,30 @@
   }
 }
 
-.mission-hold-arrows {
+.mission-hold-button {
   display: flex;
-  gap: 8px;
-  padding: 56px 0;
-}
-
-.mission-hold-arrow {
-  color: #23f7dd;
   font-size: 20px;
+  color: #23f7dd;
+  gap: 16px;
+  margin: 56px 0;
+  transition: all 400ms ease;
+  align-items: center;
 }
 
 @media (min-width: 576px) {
-  .mission-hold-arrow {
-    font-size: 28px;
+  .mission-hold-button {
+    font-size: 24px;
   }
 }
 
 @media (min-width: 768px) {
-  .mission-hold-arrow {
-    font-size: 33.662px;
+  .mission-hold-button {
+    font-size: 32px;
   }
+}
+
+.mission-hold-button:hover {
+  opacity: 0.75;
 }
 
 .mission-hold-footer {

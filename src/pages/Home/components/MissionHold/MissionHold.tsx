@@ -1,4 +1,4 @@
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Logo } from 'components/Logo';
 import { Link } from 'react-router-dom';
@@ -22,11 +22,14 @@ export const MissionHold = () => {
         resume our journey soon.
       </div>
 
-      <div className="mission-hold-arrows">
-        <FontAwesomeIcon icon={faChevronRight} className="mission-hold-arrow" />
-        <FontAwesomeIcon icon={faChevronRight} className="mission-hold-arrow" />
-        <FontAwesomeIcon icon={faChevronRight} className="mission-hold-arrow" />
-      </div>
+      <a
+        href="https://multiversx.com/sovereign-chains"
+        target="_blank"
+        className="mission-hold-button"
+      >
+        <span className="mission-hold-arrow-text">Sovereign Chains</span>
+        <FontAwesomeIcon icon={faArrowRight} className="mission-hold-button-arrow" />
+      </a>
 
       <div className="mission-hold-footer">
         Continue exploring the Web3 MultiversX and stay tuned for new updates!
