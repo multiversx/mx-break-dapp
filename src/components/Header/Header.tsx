@@ -9,7 +9,7 @@ export const Header = () => {
   useAccountUpdate();
 
   return (
-    <header className="sticky backdrop-blur-md md:backdrop-blur-none top-0 z-10 p-4 md:p-14 bg-transparent">
+    <header className="sticky backdrop-blur-md md:backdrop-blur-none top-0 z-10 p-4 bg-transparent">
       <nav className="flex items-center justify-between gap-2 sm:gap-x-6">
         <Link className="flex items-center" to={AppRoutes.HOME}>
           <Logo />

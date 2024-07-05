@@ -1,0 +1,159 @@
+.mission-hold {
+  background: url('/src/assets/hero-new.png') no-repeat center / cover;
+  border-radius: 32px;
+  margin: 32px;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mission-hold-logo {
+  padding: 48px 0 64px;
+  margin-bottom: auto;
+}
+
+.mission-hold-logo svg {
+  width: 160px;
+  height: auto;
+}
+
+@media (min-width: 576px) {
+  .mission-hold-logo svg {
+    width: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mission-hold-logo svg {
+    width: 240px;
+  }
+}
+
+.mission-hold-title {
+  background: linear-gradient(93deg, #fff 21.13%, #23f7dd 88.26%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding: 0 32px;
+  line-height: 1.125;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .mission-hold-title {
+    font-size: 56px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mission-hold-title {
+    font-size: 80px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .mission-hold-title {
+    font-size: 98.826px;
+  }
+}
+
+.mission-hold-description {
+  color: #737373;
+  text-align: center;
+  font-size: 16px;
+  padding: 0 32px;
+  max-width: 920px;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 576px) {
+  .mission-hold-description {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mission-hold-description {
+    font-size: 33.662px;
+    display: unset;
+  }
+}
+
+.mission-hold-description-icon {
+  flex: 1;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .mission-hold-description-icon {
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+    top: 16px;
+  }
+}
+
+.mission-hold-description-icon svg {
+  height: 32px;
+}
+
+@media (min-width: 768px) {
+  .mission-hold-description-icon svg {
+    height: auto;
+  }
+}
+
+.mission-hold-button {
+  display: flex;
+  font-size: 20px;
+  color: #23f7dd;
+  gap: 16px;
+  margin: 56px 0;
+  transition: all 400ms ease;
+  align-items: center;
+}
+
+@media (min-width: 576px) {
+  .mission-hold-button {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mission-hold-button {
+    font-size: 32px;
+  }
+}
+
+.mission-hold-button:hover {
+  opacity: 0.75;
+}
+
+.mission-hold-footer {
+  color: #e5e5e5;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.25;
+  padding: 0 32px 64px;
+  margin-bottom: auto;
+  max-width: 600px;
+}
+
+@media (min-width: 576px) {
+  .mission-hold-footer {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mission-hold-footer {
+    font-size: 29.162px;
+  }
+}
